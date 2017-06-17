@@ -22,6 +22,10 @@ class Shape
     Color const& get_color() const;
     String const& get_name() const;
 
+    virtual std::ostream& print(std::ostream& os) const;
+
 };
+
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 
 #endif
