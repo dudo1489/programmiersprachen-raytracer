@@ -38,3 +38,10 @@ float Sphere::volume() const
 {
     return fabs((4/3)*M_PI*pow(radius_,3));
 }
+
+std::ostream& Sphere::print(std::ostream& os) const
+{
+    os <<"Center: ("<<center_.x<<", "<<center_.y<<", "<<center_.z<<") \n"
+    <<"Radius: "<<radius_;
+    return os;
+}

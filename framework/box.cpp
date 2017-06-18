@@ -43,3 +43,10 @@ float Box::volume() const
     float volume = (max_.x-min_.x)*(max_.y-min_.y)*(max_.z-min_.z);
     return fabs(volume);
 }
+
+std::ostream& Box::print(std::ostream& os) const
+{
+    os<<"Min: ("<<min_.x<<", "<<min_.y<<", "<<min_.z<<") \n"
+    <<"Max: ("<<max_.x<<", "<<max_.y<<", "<<max_.z<<")";
+    return os;
+}

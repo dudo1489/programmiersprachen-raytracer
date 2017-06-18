@@ -86,6 +86,20 @@ TEST_CASE("sphere volume", "[volume]")
   REQUIRE(sphere.volume() == Approx(392.699));
 }
 
+TEST_CASE("box print", "[print]")
+{
+  Box box;
+  box.print(std::cout);
+  std::cout<<"\n";
+}
+
+TEST_CASE("sphere print", "[print]")
+{
+  Sphere sphere;
+  sphere.print(std::cout);
+  std::cout<<"\n";
+}
+
 
 
 int main(int argc, char *argv[])
