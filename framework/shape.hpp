@@ -16,6 +16,7 @@ class Shape
     virtual float volume() const = 0;
 
     Shape();
+    /*virtual*/ ~Shape();
     Shape(String const& name);
     Shape(Color const& color, String name);
 

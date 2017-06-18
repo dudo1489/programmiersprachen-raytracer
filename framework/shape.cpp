@@ -6,6 +6,11 @@ Shape::Shape():
     name_{"Shape"}
     {}
 
+Shape::~Shape()
+{
+    std::cout<<"destructor"<<"\n";
+}
+
 Shape::Shape(String const& name):
     color_{Color{0.0,0.0,0.0}},
     name_{name}
@@ -14,7 +19,7 @@ Shape::Shape(String const& name):
 Shape::Shape(Color const& color, String name):
     color_{color},
     name_{name}
-    {}
+    {std::cout<<"constructor"<<"\n";}
 
  Color const& Shape::get_color() const
  {
@@ -28,7 +33,7 @@ String const& Shape::get_name() const
 
 std::ostream& Shape::print(std::ostream& os) const
 {
-    os<<"Name: "<<name_<<"\n"<<"Color: "<<color_;
+    os<<"Name: "<<name_<<"\n"<<"Color: "<<color_<<"\n";
     return os; 
 }
 
