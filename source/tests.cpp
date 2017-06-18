@@ -61,6 +61,32 @@ TEST_CASE("Sphere test", "[get]")
   REQUIRE(sphere.get_name() == "Sphere_test");
 }
 
+TEST_CASE("box area", "[area]")
+{
+  Box box{glm::vec3{2.0,2.0,2.0}, glm::vec3{5.0,5.0,5.0}};
+  REQUIRE(box.area() == 54.0);
+
+}
+
+TEST_CASE("box volume", "[volume]")
+{
+  Box box{glm::vec3{2.0,2.0,2.0}, glm::vec3{5.0,5.0,5.0}};
+  REQUIRE(box.volume() == 27.0);
+}
+
+TEST_CASE("sphere area", "[area]")
+{
+  Sphere sphere{glm::vec3{1.0,2.0,3.0},5.0};
+  REQUIRE(sphere.area() == Approx(314.159));
+}
+
+TEST_CASE("sphere volume", "[volume]")
+{
+  Sphere sphere{glm::vec3{1.0,2.0,3.0},5.0};
+  REQUIRE(sphere.volume() == Approx(392.699));
+}
+
+
 
 int main(int argc, char *argv[])
 {
