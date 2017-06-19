@@ -16,6 +16,7 @@ public:
     Sphere();
     Sphere(glm::vec3 const& center, float radius);
     Sphere(glm::vec3 const& center, float radius, Color const& color, String name);
+    ~Sphere();
 
     glm::vec3 const& get_center() const;
     float get_radius() const;

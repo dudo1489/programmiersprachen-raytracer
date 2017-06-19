@@ -1,6 +1,11 @@
 #include "sphere.hpp"
 #include <cmath>
 
+Sphere::~Sphere()
+{
+    std::cout<<"destructor sphere"<<"\n";
+}
+
 Sphere::Sphere():
     Shape{"Sphere"},
     center_{glm::vec3{0.0f}},
@@ -17,7 +22,7 @@ Sphere::Sphere(glm::vec3 const& center, float radius, Color const& color, String
     Shape{color, name},
     center_{center},
     radius_{radius}
-    {}
+    {std::cout<<"constructor sphere"<<"\n";}
 
 glm::vec3 const& Sphere::get_center() const
 {
