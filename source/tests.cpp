@@ -149,7 +149,7 @@ TEST_CASE("intersectRaySphere", "[intersect]")
 
 TEST_CASE("destructor test", "[destructor]")
 {
-
+  std::cout<<"Aufgabe 5.8"<<"\n";
   Color red(250, 0, 0);
   glm::vec3 position(0,0,0);
 
