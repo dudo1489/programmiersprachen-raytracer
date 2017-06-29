@@ -8,13 +8,13 @@ Box::Box():
     {}
 
 Box::Box(glm::vec3 const& min, glm::vec3 const& max):
-    Shape{"Box"},
+    Shape{std::string {"Box"}},
     min_{min},
     max_{max}
     {}
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, Color const& color, String name):
-    Shape{color, name},
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, Material const& mat, std::string const& name):
+    Shape{mat, name},
     min_{min},
     max_{max}
     {}

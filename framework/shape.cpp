@@ -2,7 +2,7 @@
 
 
 Shape::Shape():
-    color_{Color{0.0,0.0,0.0}},
+    material_{},
     name_{"Shape"}
     {}
 
@@ -12,18 +12,18 @@ Shape::~Shape()
 }
 
 Shape::Shape(String const& name):
-    color_{Color{0.0,0.0,0.0}},
+    material_{},
     name_{name}
     {}
 
-Shape::Shape(Color const& color, String name):
-    color_{color},
+Shape::Shape(Material const& mat, String const& name):
+    material_{mat},
     name_{name}
     {std::cout<<"constructor shape"<<"\n";}
 
- Color const& Shape::get_color() const
+Material const& Shape::get_material() const
  {
-     return color_;
+     return material_;
  }
 
 String const& Shape::get_name() const
@@ -33,7 +33,7 @@ String const& Shape::get_name() const
 
 std::ostream& Shape::print(std::ostream& os) const
 {
-    os<<"Name: "<<name_<<"\n"<<"Color: "<<color_<<"\n";
+    os<<"Name: "<<name_<<"\n"<<"Material: "<<material_<<"\n";
     return os; 
 }
 

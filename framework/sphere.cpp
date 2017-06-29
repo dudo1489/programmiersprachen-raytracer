@@ -18,8 +18,8 @@ Sphere::Sphere(glm::vec3 const& center, float radius):
     radius_{radius}
     {}
 
-Sphere::Sphere(glm::vec3 const& center, float radius, Color const& color, String name):
-    Shape{color, name},
+Sphere::Sphere(glm::vec3 const& center, float radius, Material const& material, std::string const& name):
+    Shape{material, name},
     center_{center},
     radius_{radius}
     {std::cout<<"constructor sphere"<<"\n";}

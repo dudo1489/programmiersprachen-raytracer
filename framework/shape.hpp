@@ -1,14 +1,14 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "color.hpp"
+#include "material.hpp"
 #include <string>
 
 typedef std::string String;
 
 class Shape
 {
-    Color color_;
+    Material material_;
     String name_;
 
  public:
@@ -18,9 +18,9 @@ class Shape
     Shape();
     ~Shape();
     Shape(String const& name);
-    Shape(Color const& color, String name);
+    Shape(Material const& mat, String const& name);
 
-    Color const& get_color() const;
+    Material const& get_material() const;
     String const& get_name() const;
 
     virtual std::ostream& print(std::ostream& os) const;
