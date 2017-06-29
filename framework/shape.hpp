@@ -3,6 +3,7 @@
 
 #include "color.hpp"
 #include <string>
+#include "ray.hpp"
 
 typedef std::string String;
 
@@ -24,6 +25,10 @@ class Shape
     String const& get_name() const;
 
     virtual std::ostream& print(std::ostream& os) const;
+
+    virtual bool intersect(Ray const& ray ,float& t) = 0;
+            
+
 
 };
 
