@@ -54,6 +54,7 @@ std::ostream& Box::print(std::ostream& os) const
 
 bool Box::intersect(Ray const& ray ,float& t)
 {
+    
     float tfar;
     float tnear;
 
@@ -76,9 +77,6 @@ bool Box::intersect(Ray const& ray ,float& t)
   
     tfary=std::max(ty1, ty2);
     tneary=std::min(ty1, ty2);
-   
-    tfar=std::max(tfarx, tfary);
-    tnear=std::min(tnearx, tneary);
 
     float tz1 = (min_.z-ray.origin.z)/ray.direction.z;
     float tz2 = (max_.z-ray.origin.z)/ray.direction.z;
@@ -86,15 +84,21 @@ bool Box::intersect(Ray const& ray ,float& t)
     tfarz=std::max(tz1, tz2);
     tnearz=std::min(tz1, tz2);
 
-   if(tfar>tnear)
-   {
-        tfar=std::max(tfarz, tfar);
-        tnear=std::min(tnearz, tnear);
-        return true;
-   }
-   else
+    tfar=std::max(tfarx, tfary);
+    tnear=std::min(tnearx, tneary);
+
+   if(tfar<tnear)
    {
         return false;
    }
+ 
+   float newtfar=std::min(tfar, tfarz);
+   float newtnear=std::max(tnear, tnearz);
 
+   if((newtfar<0) || (newtfar<newtnear))
+   {
+       return false;
+   }
+
+   return true;
 }

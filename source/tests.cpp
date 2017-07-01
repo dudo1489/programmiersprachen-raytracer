@@ -158,7 +158,7 @@ TEST_CASE("intersectRayBox", "[intersect]")
   float distance = 10;
   
   Ray ray{glm::vec3{5.0}, glm::vec3{-1.0, -1.0, -1.0,}};
-  //ray.direction = glm::normalize(ray.direction);
+  
 
   REQUIRE(box.intersect(ray, distance) == true);
 
