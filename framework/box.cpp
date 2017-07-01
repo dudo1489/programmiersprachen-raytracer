@@ -92,10 +92,10 @@ bool Box::intersect(Ray const& ray ,float& t)
         return false;
    }
  
-   float newtfar=std::min(tfar, tfarz);
-   float newtnear=std::max(tnear, tnearz);
+   tfar=std::min(tfar, tfarz);
+   tnear=std::max(tnear, tnearz);
 
-   if((newtfar<0) || (newtfar<newtnear))
+   if((tfar<0) || (tfar<tnear))
    {
        return false;
    }
