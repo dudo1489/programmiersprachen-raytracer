@@ -10,11 +10,11 @@ struct Material
 {
 		string name_;
 
-		Color ka_;
-		Color kd_;
-		Color ks_;
+		Color ka_; //ambiente 
+		Color kd_;	//difuse
+		Color ks_;	//Reflection
 
-		float m_; // Reflection
+		float m_; // ExponentReflection
 
 
 		Material();
@@ -24,19 +24,19 @@ struct Material
     friend ostream& operator<<(ostream& os, Material const& mat)
     {  
 	    os 
-	    << 'name:'
+	    << "name:"
 	    << mat.name_ 
-	    << '/' 
-	    << 'ka'
+	    << '/'
+	    << "ka"
 	    << mat.ka_ 
 	    << '/' 
-	    << 'kd'
+	    << "kd"
 	    << mat.kd_ 
 	    << '/' 
-	    << 'ks'
+	    << "ks"
 	    << mat.ks_ 
 	    << '/' 
-	    << 'm'
+	    << "m"
 	    << mat.m_;  
 	    return os;  
 	}
