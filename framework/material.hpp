@@ -26,29 +26,20 @@ struct Material
 	    os 
 	    << "name:"
 	    << mat.name_ 
-	    << '/' 
+	    << "\n" 
 	    << "ka:"
 	    << mat.ka_ 
-	    << '/' 
+	    << "\n"
 	    << "kd:"
 	    << mat.kd_ 
-	    << '/' 
+	    << "\n" 
 	    << "ks:"
 	    << mat.ks_ 
-	    << '/' 
+	    << "\n" 
 	    << "m:"
-	    << '/'
-	    << "ka"
-	    << mat.ka_ 
-	    << '/' 
-	    << "kd"
-	    << mat.kd_ 
-	    << '/' 
-	    << "ks"
-	    << mat.ks_ 
-	    << '/' 
-	    << "m"
-	    << mat.m_;  
+	    << mat.m_ 
+	    << "\n" ;
+
 	    return os;  
 	}
 
