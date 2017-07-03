@@ -24,19 +24,19 @@ struct Material
     friend ostream& operator<<(ostream& os, Material const& mat)
     {  
 	    os 
-	    << 'name:'
+	    << "name:"
 	    << mat.name_ 
 	    << '/' 
-	    << 'ka'
+	    << "ka:"
 	    << mat.ka_ 
 	    << '/' 
-	    << 'kd'
+	    << "kd:"
 	    << mat.kd_ 
 	    << '/' 
-	    << 'ks'
+	    << "ks:"
 	    << mat.ks_ 
 	    << '/' 
-	    << 'm'
+	    << "m:"
 	    << mat.m_;  
 	    return os;  
 	}
