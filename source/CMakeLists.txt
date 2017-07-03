@@ -25,3 +25,9 @@ target_link_libraries(tests
   ${GLFW_LIBRARIES}
   )
 
+#Build aufgabe65
+add_executable(aufgabe65 aufgabe65.cpp)
+target_link_libraries(aufgabe65 ${FRAMEWORK_NAME} ${LIBRARIES}
+  glfw
+  ${GLFW_LIBRARIES}
+  )

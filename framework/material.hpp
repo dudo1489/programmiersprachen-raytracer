@@ -10,11 +10,11 @@ struct Material
 {
 		string name_;
 
-		Color ka_;
-		Color kd_;
-		Color ks_;
+		Color ka_; //ambiente 
+		Color kd_;	//difuse
+		Color ks_;	//Reflection
 
-		float m_; // Reflection
+		float m_; // ExponentReflection
 
 
 		Material();
@@ -37,6 +37,17 @@ struct Material
 	    << mat.ks_ 
 	    << '/' 
 	    << "m:"
+	    << '/'
+	    << "ka"
+	    << mat.ka_ 
+	    << '/' 
+	    << "kd"
+	    << mat.kd_ 
+	    << '/' 
+	    << "ks"
+	    << mat.ks_ 
+	    << '/' 
+	    << "m"
 	    << mat.m_;  
 	    return os;  
 	}
