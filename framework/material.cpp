@@ -1,7 +1,5 @@
 #include "material.hpp"
 
-
-
 Material::Material():
 	name_{"new_Material"},
 	ka_{Color{0.0f,0.1f,0.2f}},

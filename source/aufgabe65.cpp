@@ -1,15 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include "material.hpp"
 #include "color.hpp"
 #include <sstream>
 #include <string>
-#include "material.hpp"
+
 
 
 
 int main()
 {
+	
 	std::ifstream Colorsource;
 	Colorsource.open("farben_zum_einlesen.txt", std::ios_base::in);
 
@@ -41,6 +43,7 @@ int main()
 					if(not_used == "material")
 					{
 						ss >> new_material.name_;
+						ss >> new_material.ka_.r;
 						ss >> new_material.ka_.g;
 						ss >> new_material.ka_.b;
 						ss >> new_material.kd_.r;
@@ -59,6 +62,7 @@ int main()
 		}
 	
 	}
+	
 	return 0;
 }
 
