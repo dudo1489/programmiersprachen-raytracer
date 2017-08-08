@@ -15,6 +15,9 @@ add_dependencies(raytracer glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
 
 install(TARGETS raytracer DESTINATION .)
 
+#BuildAufgabe65
+#add_executable(aufgabe aufgabe65.cpp)
+
 # Build tests
 add_executable(tests
   tests.cpp)
