@@ -63,12 +63,12 @@ Scene SDFloader::load(std::string const& file_to_read)
                     if(keyword == "box")
                     {
                         //Box box;    //neue einzuordnende box erstellen
-                        std::string boxname;    //boxname und Clr nich in box vorhanden daher separat speichern
+                        std::string boxName;    //boxname und Clr nich in box vorhanden daher separat speichern
                         std::string boxClrName;
                         glm::vec3 boxMin;
                         glm::vec3 boxMax;
 
-                        ss >> boxname;
+                        ss >> boxName;
                         ss >> boxMin.x;
                         ss >> boxMin.y;
                         ss >> boxMin.z;
@@ -79,14 +79,29 @@ Scene SDFloader::load(std::string const& file_to_read)
 
                         Material boxMaterial = loadedScene.materials_.find(boxClrName) -> second; //boxmaterial mit einbeziehen um boxconstructor zu verwenden 
                                                                                                 // -> second damit boxMaterial value der map annimmt ->first wuerde auf key zeigen
-                        auto box = std::make_shared<Box>(boxMin, boxMax, boxMaterial, boxname);    //make_shared uebergibt argumente an constructor,
+                        auto box = std::make_shared<Box>(boxMin, boxMax, boxMaterial, boxName);    //make_shared uebergibt argumente an constructor,
                                                                                                     //gibt objekt vom typ shared_ptr zurueck welches auf erstelltes objekt zeigt
 
-                        loadedScene.shape_[boxname]=box;    //box in loadedScene speichern nach keyword boxname
+                        loadedScene.shape_[boxName]=box;    //box in loadedScene speichern nach keyword boxname
                     }
 
                     if(keyword == "sphere")
                     {
+                        std::string sphereName;
+                        std::string sphereColor;
+                        glm::vec3 center;
+                        float radius;
+
+                        ss >> sphereName;
+                        ss >> center.x;
+                        ss >> center.y;
+                        ss >> center.z;
+                        ss >> radius;
+
+                        Material sphereMaterial = loadedScene.materials_.find(sphereName) -> second; //wie bei box
+                        auto sphere = std::make_shared<Sphere>(center, radius, sphereMaterial, sphereName);
+
+                        loadedScene.shape_[sphereName]=sphere;
 
                     }
                 }
