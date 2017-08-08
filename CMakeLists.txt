@@ -65,6 +65,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/${GLM_DIRECTORY})
 
 set(LIBRARIES glfw ${GLFW_LIBRARIES})
 
+set(CMAKE_CXX_STANDARD 11)
+
 if(MSVC)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif(MSVC)

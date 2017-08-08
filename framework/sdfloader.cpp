@@ -7,7 +7,6 @@
 
 
 
-
 Scene SDFloader::load(std::string const& file_to_read)
 {
     std::ifstream file;
@@ -23,13 +22,14 @@ Scene SDFloader::load(std::string const& file_to_read)
     }
     else
     {
-        while (std::getline(file, line))
+        while (std::getline(file, line))    //jede Zeile der datei durchgehen
         {
             std::stringstream ss;
             std::string keyword;
 
-            ss << line;
-            ss >> keyword;
+            ss << line; //string stream ss wird zur zeile
+            ss >> keyword;  //ss springt zum ersten wort
+
 
             if(keyword == "define")
             {
@@ -39,7 +39,7 @@ Scene SDFloader::load(std::string const& file_to_read)
                 {
                     Material material;  //material zwischenspeichern
 
-                    ss >> material.name;
+                    ss >> material.name_;    //name, rgb farbwerte werden zu material member
                     ss >> material.ka_.r;
                     ss >> material.ka_.g;
                     ss >> material.ka_.b;
@@ -51,17 +51,43 @@ Scene SDFloader::load(std::string const& file_to_read)
                     ss >> material.ks_.b;
                     ss >> material.m_;
 
-                    loadedScene.materials_[material.name]=material;    //material in scene ueberschreiben
-                    
-
+                    loadedScene.materials_[material.name_]=material;    //material in scene ueberschreiben
+                                                                        //wird nach keyword in die map materials_ eingeordnet
                 }
+
+
                 if(keyword == "shape")
                 {
                     ss >> keyword;
 
                     if(keyword == "box")
                     {
-                        
+                        //Box box;    //neue einzuordnende box erstellen
+                        std::string boxname;    //boxname und Clr nich in box vorhanden daher separat speichern
+                        std::string boxClrName;
+                        glm::vec3 boxMin;
+                        glm::vec3 boxMax;
+
+                        ss >> boxname;
+                        ss >> boxMin.x;
+                        ss >> boxMin.y;
+                        ss >> boxMin.z;
+                        ss >> boxMax.x;
+                        ss >> boxMax.y;
+                        ss >> boxMax.z;
+                        ss >> boxClrName;
+
+                        Material boxMaterial = loadedScene.materials_.find(boxClrName) -> second; //boxmaterial mit einbeziehen um boxconstructor zu verwenden 
+                                                                                                // -> second damit boxMaterial value der map annimmt ->first wuerde auf key zeigen
+                        auto box = std::make_shared<Box>(boxMin, boxMax, boxMaterial, boxname);    //make_shared uebergibt argumente an constructor,
+                                                                                                    //gibt objekt vom typ shared_ptr zurueck welches auf erstelltes objekt zeigt
+
+                        loadedScene.shape_[boxname]=box;    //box in loadedScene speichern nach keyword boxname
+                    }
+
+                    if(keyword == "sphere")
+                    {
+
                     }
                 }
             }
@@ -123,10 +149,10 @@ Scene SDFloader::load(std::string const& file_to_read)
 		}
 
 	}
-	
+ 	
 	return 0;
 }
- */
+  */
 
 
 //  Material testmat(std::string {"testmaterial"}, Color{0.5f,1.0f,0.5f}, Color{0.8f,0.8f,0.4f}, Color{0.8f,0.9f,0.6f}, 0.6f);
