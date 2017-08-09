@@ -6,6 +6,7 @@
 #include "box.hpp"
 #include "color.hpp"
 #include "material.hpp"
+#include "light.hpp"
 
 #include <sstream>
 #include <vector>

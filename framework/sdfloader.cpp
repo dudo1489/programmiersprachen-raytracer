@@ -104,6 +104,28 @@ Scene SDFloader::load(std::string const& file_to_read)
                         loadedScene.shape_[sphereName]=sphere;
 
                     }
+
+
+                    if(keyword == "light")
+                    {
+                        std::string lightName;
+                        glm::vec3 point;
+                        Color color;
+                        float brightness;
+
+                        ss >> lightName;
+                        ss >> point.x;
+                        ss >> point.y;
+                        ss >> point.z;
+                        ss >> color.r;
+                        ss >> color.g;
+                        ss >> color.b;
+                        ss >> brightness;
+
+                        auto light = std::make_shared<Light>(lightName, point, color, brightness);
+
+                        loadedScene.light_[lightName]=light;
+                    }
                 }
             }
         }
