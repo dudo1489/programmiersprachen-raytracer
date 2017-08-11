@@ -7,6 +7,7 @@
 
 
 
+
 Scene SDFloader::load(std::string const& file_to_read)
 {
     std::ifstream file;
@@ -104,9 +105,9 @@ Scene SDFloader::load(std::string const& file_to_read)
                         loadedScene.shape_[sphereName]=sphere;
 
                     }
+                }
 
-
-                    if(keyword == "light")
+                if(keyword == "light")
                     {
                         std::string lightName;
                         glm::vec3 point;
@@ -126,7 +127,26 @@ Scene SDFloader::load(std::string const& file_to_read)
 
                         loadedScene.light_[lightName]=light;
                     }
-                }
+    
+                if(keyword == "camera")
+                    {
+                        std::string cameraName;
+                        glm::vec3 position;
+                        float fov_x;
+
+                        ss >> cameraName;
+
+                        ss >> position.x;
+                        ss >> position.y;
+                        ss >> position.z;
+
+                        ss >> fov_x;
+
+                        auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
+
+                        loadedScene.camera_[cameraName]=camera;
+                    }
+
             }
         }
     }
