@@ -3,13 +3,13 @@
 
 
 Box::Box():
-    Shape{"Box"},
+    Shape{{}, "Box"},
     min_{glm::vec3{0.0f}},
     max_{glm::vec3{1.0f}}
     {}
 
 Box::Box(glm::vec3 const& min, glm::vec3 const& max):
-    Shape{std::string {"Box"}},
+    Shape{{}, "Box"},
     min_{min},
     max_{max}
     {}

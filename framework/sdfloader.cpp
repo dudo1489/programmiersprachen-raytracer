@@ -7,6 +7,7 @@
 
 
 
+
 Scene SDFloader::load(std::string const& file_to_read)
 {
     std::ifstream file;
@@ -53,6 +54,7 @@ Scene SDFloader::load(std::string const& file_to_read)
 
                     loadedScene.materials_[material.name_]=material;    //material in scene ueberschreiben
                                                                         //wird nach keyword in die map materials_ eingeordnet
+                    std::cout << "added material: " << material.name_ << "\n";
                 }
 
 
@@ -83,6 +85,8 @@ Scene SDFloader::load(std::string const& file_to_read)
                                                                                                     //gibt objekt vom typ shared_ptr zurueck welches auf erstelltes objekt zeigt
 
                         shape_ptr[boxName]=box;    //box in map fuer shape zeiger speichern nach keyword boxname
+
+                        std::cout << "added shape: " << boxName << "\n";
                     }
 
                     if(keyword == "sphere")
@@ -103,32 +107,74 @@ Scene SDFloader::load(std::string const& file_to_read)
 
                         shape_ptr[sphereName]=sphere;
 
+                        std::cout << "added shape: " << sphereName << "\n";
                     }
 
-                    
 
+                    if(keyword == "composite")
+                    {
+                        std::string compositeName;
+                        std::string shapeName;
 
+                        ss >> compositeName;   
+                        loadedScene.composite_ = std::make_shared<Composite>(compositeName);    //erstelle zeiger auf composite
+                       
+                        while(!ss.eof())    //while ss not at end of file 
+                        {
+                        ss >> shapeName;
+                        auto shape_to_insert = shape_ptr.find(shapeName);
+
+                            if(shape_to_insert != shape_ptr.end())
+                            {
+                            loadedScene.composite_ -> add_shape(shape_to_insert -> second);
+                            std::cout << "added composite: " << compositeName << "\n"; 
+                            
+                            }
+                        } 
+
+                    }
                 }
+
                 if(keyword == "light")
-                {
-                    std::string lightName;  //grundaufbau wie box und sphere
-                    glm::vec3 point;
-                    Color color;
-                    float brightness;
+                    {
+                        std::string lightName;
+                        glm::vec3 point;
+                        Color color;
+                        float brightness;
 
-                    ss >> lightName;
-                    ss >> point.x;
-                    ss >> point.y;
-                    ss >> point.z;
-                    ss >> color.r;
-                    ss >> color.g;
-                    ss >> color.b;
-                    ss >> brightness;
+                        ss >> lightName;
+                        ss >> point.x;
+                        ss >> point.y;
+                        ss >> point.z;
+                        ss >> color.r;
+                        ss >> color.g;
+                        ss >> color.b;
+                        ss >> brightness;
 
-                    auto light = std::make_shared<Light>(lightName, point, color, brightness);  //siehe box
+                        auto light = std::make_shared<Light>(lightName, point, color, brightness);
 
-                    loadedScene.light_[lightName]=light;
-                }
+                        loadedScene.light_[lightName]=light;
+                    }
+    
+                if(keyword == "camera")
+                    {
+                        std::string cameraName;
+                        glm::vec3 position;
+                        float fov_x;
+
+                        ss >> cameraName;
+
+                        ss >> position.x;
+                        ss >> position.y;
+                        ss >> position.z;
+
+                        ss >> fov_x;
+
+                        auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
+
+                        loadedScene.camera_[cameraName]=camera;
+                    }
+
             }
         }
     }

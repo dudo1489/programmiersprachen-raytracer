@@ -7,13 +7,13 @@ Sphere::~Sphere()
 }
 
 Sphere::Sphere():
-    Shape{"Sphere"},
+    Shape{{}, "Sphere"},
     center_{glm::vec3{0.0f}},
     radius_{1}
     {}
 
 Sphere::Sphere(glm::vec3 const& center, float radius):
-    Shape{"Sphere"},
+    Shape{{}, "Sphere"},
     center_{center},
     radius_{radius}
     {}

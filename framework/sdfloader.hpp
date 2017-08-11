@@ -8,6 +8,8 @@
 #include "material.hpp"
 #include "light.hpp"
 #include "composite.hpp"
+#include "camera.hpp"
+#include "shape.hpp"
 
 #include <sstream>
 #include <vector>

@@ -11,10 +11,10 @@ Shape::~Shape()
     std::cout<<"destructor shape"<<"\n";
 }
 
-Shape::Shape(String const& name):
+/* Shape::Shape(String const& name):
     material_{},
     name_{name}
-    {}
+    {} */
 
 Shape::Shape(Material const& mat, String const& name):
     material_{mat},

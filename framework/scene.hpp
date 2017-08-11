@@ -12,6 +12,7 @@
 #include <string>
 #include "light.hpp"
 #include "composite.hpp"
+#include "camera.hpp"
 
 
 
@@ -22,6 +23,9 @@ struct Scene
     std::map<std::string, Material> materials_;
     std::map<std::string, std::shared_ptr<Light>> light_;
     std::shared_ptr<Composite> composite_;
+    std::map<std::string, std::shared_ptr<Camera>> camera_;
+
+
 };
 
 #endif 

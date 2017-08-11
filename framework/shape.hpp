@@ -18,7 +18,7 @@ class Shape
 
     Shape();
     ~Shape();
-    Shape(String const& name);
+    //Shape(String const& name);
     Shape(Material const& mat, String const& name);
 
     Material const& get_material() const;
