@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include "light.hpp"
+#include "composite.hpp"
 
 
 
@@ -19,11 +20,8 @@ struct Scene
 {
     
     std::map<std::string, Material> materials_;
-    //std::map<std::string, std::shared_ptr<Box>> box_;
-    //std::map<std::string, std::shared_ptr<Sphere>> sphere_;
-    std::map<std::string, std::shared_ptr<Shape>> shape_;
-    //std::map<std::string, std::shared_ptr<Color>> color_;
     std::map<std::string, std::shared_ptr<Light>> light_;
+    std::shared_ptr<Composite> composite_;
 };
 
 #endif 

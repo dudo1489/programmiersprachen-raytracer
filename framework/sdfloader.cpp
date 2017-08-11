@@ -12,8 +12,8 @@ Scene SDFloader::load(std::string const& file_to_read)
     std::ifstream file;
     std::string line;
     Scene loadedScene;
-
-
+    std::map<std::string, std::shared_ptr<Shape>> shape_ptr;
+    
     file.open(file_to_read);    //open file
 
     if(!file.is_open())
@@ -82,7 +82,7 @@ Scene SDFloader::load(std::string const& file_to_read)
                         auto box = std::make_shared<Box>(boxMin, boxMax, boxMaterial, boxName);    //make_shared uebergibt argumente an constructor,
                                                                                                     //gibt objekt vom typ shared_ptr zurueck welches auf erstelltes objekt zeigt
 
-                        loadedScene.shape_[boxName]=box;    //box in loadedScene speichern nach keyword boxname
+                        shape_ptr[boxName]=box;    //box in map fuer shape zeiger speichern nach keyword boxname
                     }
 
                     if(keyword == "sphere")
@@ -101,35 +101,38 @@ Scene SDFloader::load(std::string const& file_to_read)
                         Material sphereMaterial = loadedScene.materials_.find(sphereName) -> second; //wie bei box
                         auto sphere = std::make_shared<Sphere>(center, radius, sphereMaterial, sphereName);
 
-                        loadedScene.shape_[sphereName]=sphere;
+                        shape_ptr[sphereName]=sphere;
 
                     }
 
+                    
 
-                    if(keyword == "light")
-                    {
-                        std::string lightName;
-                        glm::vec3 point;
-                        Color color;
-                        float brightness;
 
-                        ss >> lightName;
-                        ss >> point.x;
-                        ss >> point.y;
-                        ss >> point.z;
-                        ss >> color.r;
-                        ss >> color.g;
-                        ss >> color.b;
-                        ss >> brightness;
+                }
+                if(keyword == "light")
+                {
+                    std::string lightName;  //grundaufbau wie box und sphere
+                    glm::vec3 point;
+                    Color color;
+                    float brightness;
 
-                        auto light = std::make_shared<Light>(lightName, point, color, brightness);
+                    ss >> lightName;
+                    ss >> point.x;
+                    ss >> point.y;
+                    ss >> point.z;
+                    ss >> color.r;
+                    ss >> color.g;
+                    ss >> color.b;
+                    ss >> brightness;
 
-                        loadedScene.light_[lightName]=light;
-                    }
+                    auto light = std::make_shared<Light>(lightName, point, color, brightness);  //siehe box
+
+                    loadedScene.light_[lightName]=light;
                 }
             }
         }
     }
+
 }
 
 

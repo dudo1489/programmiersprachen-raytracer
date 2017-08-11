@@ -7,6 +7,7 @@
 #include "color.hpp"
 #include "material.hpp"
 #include "light.hpp"
+#include "composite.hpp"
 
 #include <sstream>
 #include <vector>
