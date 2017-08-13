@@ -24,6 +24,7 @@
 
 class SDFloader
 {
+    public:
     static Scene load(std::string const& inpath);
 };
 
