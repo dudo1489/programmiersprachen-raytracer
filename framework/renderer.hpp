@@ -15,12 +15,13 @@
 #include "ppmwriter.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include "scene.hpp"
 
 class Renderer
 {
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
-  Renderer(unsigned w, unsigned h, std::string const& file Scene const& scene);
+  Renderer(unsigned w, unsigned h, std::string const& file, Scene const& scene);
 
   void render();
   void write(Pixel const& p);
