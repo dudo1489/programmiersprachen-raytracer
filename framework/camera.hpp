@@ -3,7 +3,8 @@
 
 #include <glm/vec3.hpp>
 #include <string>
-#include "scene.hpp"
+
+
 
 struct Camera 
 {
