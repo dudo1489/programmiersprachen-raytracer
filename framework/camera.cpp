@@ -13,7 +13,7 @@
     Camera::Camera(std::string const& name, glm::vec3 const& position, float fov_x):
         name_{name},
         position_{position},
-        view_{position},//muss nóch für die z achse einen negativeren wert bekommen als position
+        view_{0.0, 0.0, -1.0},//muss nóch für die z achse einen negativeren wert bekommen als position
         fov_x_{fov_x}
         {}
 

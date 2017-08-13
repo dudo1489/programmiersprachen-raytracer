@@ -22,10 +22,11 @@ public : // c'tor
 
   Pixel(unsigned int = 0, unsigned int = 0);
   void print(std::ostream&) const;
-
+  Color const& get_color() const;
   unsigned int x;
   unsigned int y;
   Color color;
+
 };
 
 std::ostream& operator<<(std::ostream&, const Pixel&);
