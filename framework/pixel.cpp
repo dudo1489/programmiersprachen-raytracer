@@ -24,8 +24,9 @@ void Pixel::print(std::ostream& os) const
      << color.b << ')';
 }
 
-Color Pixel::get_color()
+Color Pixel::get_color(Scene const& scene)
 {
+std::cout<<"getcolor_started"<<"\n";
 return color;
 }
 

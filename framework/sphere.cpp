@@ -3,7 +3,7 @@
 
 Sphere::~Sphere()
 {
-    std::cout<<"destructor sphere"<<"\n";
+   // std::cout<<"destructor sphere"<<"\n";
 }
 
 Sphere::Sphere():
@@ -22,8 +22,10 @@ Sphere::Sphere(glm::vec3 const& center, float radius, Material const& material, 
     Shape{material, name},
     center_{center},
     radius_{radius}
-    {std::cout<<"constructor sphere"<<"\n";}
-
+    {
+   //     std::cout<<"constructor sphere"<<"\n";
+    }
+    
 glm::vec3 const& Sphere::get_center() const
 {
     return center_;

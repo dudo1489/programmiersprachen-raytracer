@@ -86,7 +86,7 @@ Scene load(std::string const& file_to_read)
 
                         shape_ptr[boxName]=box;    //box in map fuer shape zeiger speichern nach keyword boxname
 
-                        std::cout << "added shape: " << boxName << "\n";
+                        std::cout << "added shape box: " << boxName << "\n";
                     }
 
                     if(keyword == "sphere")
@@ -107,7 +107,7 @@ Scene load(std::string const& file_to_read)
 
                         shape_ptr[sphereName]=sphere;
 
-                        std::cout << "added shape: " << sphereName << "\n";
+                        std::cout << "added shape sphere: " << sphereName << "\n";
                     }
 
 
