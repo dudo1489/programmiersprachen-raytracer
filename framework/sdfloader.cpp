@@ -8,7 +8,7 @@
 
 
 
-Scene SDFloader::load(std::string const& file_to_read)
+Scene load(std::string const& file_to_read)
 {
     std::ifstream file;
     std::string line;

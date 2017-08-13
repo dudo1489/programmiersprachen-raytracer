@@ -7,17 +7,19 @@
 #include <cmath>
 #include "sdfloader.hpp"
 #include <memory>
+#include "scene.hpp"
 
 
 int main(int argc, char* argv[])
 {
+  std::string input_path;
+  std::cout << "Please enter the path to your file:" << std::endl;
+  std::cin >> input_path;
   unsigned const width = 800;
   unsigned const height = 600;
   std::string const filename = "./checkerboard.ppm";
-  std::shared_ptr<SDFloader> sdfloader;
-  Scene loadedScene;
-  
-  loadedScene = sdfloader -> load(filename);
+
+  Scene sceneToRender = load(input_path); //lade scene 
 
   Renderer app{width, height, filename};
 
