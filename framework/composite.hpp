@@ -5,8 +5,9 @@
 #include <memory>
 #include "shape.hpp"
 #include <map>
+#include <ostream>
 
-class Composite
+class Composite : public Shape
 {
     public:
     
@@ -20,8 +21,7 @@ class Composite
     float area() const;
     float volume() const;    
 
-    std::ostream& print(std::ostream& os) const;
-
+    std::ostream& print(std::ostream& os);    //mussten implementiert werden da Composite sonst virtuell
     bool intersect(Ray const& ray ,float& t);
 
     private:

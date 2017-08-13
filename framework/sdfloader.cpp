@@ -156,7 +156,7 @@ Scene SDFloader::load(std::string const& file_to_read)
                         loadedScene.light_[lightName]=light;
                     }
     
-                if(keyword == "camera")
+                 if(keyword == "camera")
                     {
                         std::string cameraName;
                         glm::vec3 position;
@@ -173,7 +173,7 @@ Scene SDFloader::load(std::string const& file_to_read)
                         auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
 
                         loadedScene.camera_[cameraName]=camera;
-                    }
+                    } 
 
             }
         }

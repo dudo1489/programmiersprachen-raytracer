@@ -31,3 +31,4 @@ target_link_libraries(aufgabe65 ${FRAMEWORK_NAME} ${LIBRARIES}
   glfw
   ${GLFW_LIBRARIES}
   )
+

@@ -42,17 +42,18 @@ float Composite::volume() const
         }
     }   
 
-std::ostream& print(std::ostream& os) const
+std::ostream& Composite::print(std::ostream& os)
     {
-        for(auto const& shape : shapes_)
+         for(auto const& shape : shape_)
         {
             shape ->print(os);
             os << "\n";
         }
-        return os;
+        return os; 
     }
 
-bool intersect(Ray const& ray ,float& t)
+
+bool Composite::intersect(Ray const& ray ,float& t)
 {
     bool hitFar;
     bool hitClose;
@@ -63,7 +64,7 @@ bool intersect(Ray const& ray ,float& t)
         {
             hitClose=hitFar;
         }
-        return hitClose;
+        return hitClose; 
     }
 }
   

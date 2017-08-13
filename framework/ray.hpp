@@ -18,6 +18,8 @@ struct Ray
     direction{direction}
     {}
 
+    get_color():
+    
 
 };
 
