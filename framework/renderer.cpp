@@ -24,8 +24,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const&
   , filename_(file)
   , ppm_(width_, height_)
   , scene_(scene)
-{std::cout<<"rendererkonstruktor works"<<"\n";
-}
+{std::cout<<"rendererkonstruktor works"<<"\n";}
 
 void Renderer::render()
 {
@@ -40,7 +39,7 @@ void Renderer::render()
         p.color = Color(1, 0.0, .0float(y)/width_);
       }
     */
-      p.color = p.get_color(scene_);
+      //p.color = p.get_color(scene_);
 
       // std::cout<<"Pixel"<<x<<","<<y<<"\n";
   //    p.color = Color(1.0, 0.0, 1.0);//berechnet aus 
