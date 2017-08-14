@@ -24,11 +24,6 @@ void Pixel::print(std::ostream& os) const
      << color.b << ')';
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 56ec5beba58e14f0c18b0719aa1e555c111f50ba
-
 
 
 std::ostream& operator<<(std::ostream& os, const Pixel& a)
