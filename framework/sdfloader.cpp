@@ -91,7 +91,7 @@ Scene load(std::string const& file_to_read)
 
                     if(keyword == "sphere")
                     {
-                        std::cout << "sphere start \n";
+                        
                         std::string sphereName;
                         std::string sphereColor;
                         glm::vec3 center;
@@ -104,11 +104,10 @@ Scene load(std::string const& file_to_read)
                         ss >> radius;
                         ss >> sphereColor;
 
-                        std::cout << "sphere vor speichern \n";
-                        
+
                         Material sphereMaterial = loadedScene.materials_.find(sphereColor) -> second; //wie bei box
                         auto sphere = std::make_shared<Sphere>(center, radius, sphereMaterial, sphereName);
-                        std::cout << "bla \n";
+                        
                         shape_ptr[sphereName]=sphere;
 
                         std::cout << "added shape sphere: " << sphereName << "\n";
