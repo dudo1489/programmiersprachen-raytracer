@@ -52,7 +52,7 @@ std::ostream& Box::print(std::ostream& os) const
     return os;
 }
 
-bool Box::intersect(Ray const& ray ,float& t)
+Hit Box::intersect(Ray const& ray ,float& t)
 {
     
     float tfar;

@@ -53,7 +53,7 @@ std::ostream& Sphere::print(std::ostream& os) const
     return os;
 }
 
-bool Sphere::intersect(Ray const& ray, float& distance)
+Hit Sphere::intersect(Ray const& ray, float& distance)
 {
     
    auto norm_direction = glm::normalize(ray.direction);

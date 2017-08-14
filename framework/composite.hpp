@@ -6,6 +6,7 @@
 #include "shape.hpp"
 #include <map>
 #include <ostream>
+#include "hit.hpp"
 
 class Composite : public Shape
 {
@@ -22,7 +23,7 @@ class Composite : public Shape
     float volume() const;    
 
     std::ostream& print(std::ostream& os);    //mussten implementiert werden da Composite sonst virtuell
-    bool intersect(Ray const& ray ,float& t);
+    Hit intersect(Ray const& ray ,float& t);
 
     private:
     std::vector<std::shared_ptr<Shape>> shape_;

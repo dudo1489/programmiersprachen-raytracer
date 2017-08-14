@@ -4,6 +4,7 @@
 #include "material.hpp"
 #include <string>
 #include "ray.hpp"
+#include "hit.hpp"
 
 typedef std::string String;
 
@@ -26,7 +27,7 @@ class Shape
 
     virtual std::ostream& print(std::ostream& os) const;
 
-    virtual bool intersect(Ray const& ray ,float& t) = 0;
+    virtual Hit intersect(Ray const& ray ,float& t) = 0;
             
 
 
