@@ -24,7 +24,8 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const&
   , filename_(file)
   , ppm_(width_, height_)
   , scene_(scene)
-{}
+{std::cout<<"rendererkonstruktor works"<<"\n";
+}
 
 void Renderer::render()
 {
@@ -65,3 +66,9 @@ void Renderer::write(Pixel const& p)
 
   ppm_.write(p);
 }
+
+  Color trace(Ray const & r)
+  {
+    scene_.
+  }
+
