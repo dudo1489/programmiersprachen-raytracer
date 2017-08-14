@@ -25,12 +25,11 @@ public : // c'tor
 
   Pixel(unsigned int = 0, unsigned int = 0);
   void print(std::ostream&) const;
-  Color get_color(Scene const& scene);
   unsigned int x;
   unsigned int y;
   Color color;
 
-  
+
   private:
   
 

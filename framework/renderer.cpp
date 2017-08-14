@@ -40,8 +40,6 @@ void Renderer::render()
         p.color = Color(1, 0.0, .0float(y)/width_);
       }
     */
-      p.color = p.get_color(scene_);
-
       // std::cout<<"Pixel"<<x<<","<<y<<"\n";
   //    p.color = Color(1.0, 0.0, 1.0);//berechnet aus 
 
