@@ -69,6 +69,6 @@ void Renderer::write(Pixel const& p)
 
   Color trace(Ray const & r)
   {
-    scene_.
+    //scene_.
   }
 
