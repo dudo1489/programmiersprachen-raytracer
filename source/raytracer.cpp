@@ -13,8 +13,8 @@
 int main(int argc, char* argv[])
 {
   std::string input_path;
-  int  const width = 800;
-  int const height = 600;
+  unsigned  const width = 800;
+  unsigned const height = 600;
   std::cout << "Please enter the path to your file:" << std::endl;
   std::cin >> input_path;
 
@@ -24,8 +24,9 @@ int main(int argc, char* argv[])
   std::cout<<"scene erstellt"<<"\n";
 
 
- // Renderer app{width, height, filename};
- Renderer app{width, height, filename, sceneToRender};
+  //Renderer app{width, height, filename};
+  Renderer app= Renderer{width, height, filename, sceneToRender};
+ 
 
   std::thread thr([&app]() { app.render(); });
 

@@ -15,7 +15,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   , colorbuffer_(w*h, Color(0.0, 0.0, 0.0))
   , filename_(file)
   , ppm_(width_, height_)
-{}
+{std::cout<<"renderkonstruktor ohne scene \n";}
 
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const& scene)
   : width_(w)

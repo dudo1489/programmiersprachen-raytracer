@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
+#include <window.hpp>
 
 int main(int argc, char* argv[])
 {

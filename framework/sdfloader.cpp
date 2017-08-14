@@ -182,6 +182,8 @@ Scene load(std::string const& file_to_read)
         }
     }
 
+    return loadedScene;
+
 }
 
 
