@@ -6,20 +6,19 @@ Shape::Shape():
     name_{"Shape"}
     {}
 
-Shape::~Shape()
-{
-  //  std::cout<<"destructor shape"<<"\n";
-}
 
-/* Shape::Shape(String const& name):
+ Shape::Shape(String const& name):
     material_{},
     name_{name}
-    {} */
+    {} 
 
 Shape::Shape(Material const& mat, String const& name):
     material_{mat},
     name_{name}
  //  { std::cout<<"constructor shape"<<"\n";}
+    {}
+
+Shape::~Shape() 
     {}
 
 Material const& Shape::get_material() const

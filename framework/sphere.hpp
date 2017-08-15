@@ -16,7 +16,7 @@ public:
     Sphere();
     Sphere(glm::vec3 const& center, float radius);
     Sphere(glm::vec3 const& center, float radius, Material const& material, std::string const& name);
-    ~Sphere();
+   ~Sphere() override;
 
     glm::vec3 const& get_center() const;
     float get_radius() const;
@@ -26,6 +26,7 @@ public:
 
     std::ostream& print(std::ostream& os) const override;
 
+   // bool intersect(Ray const& ray, float& distance) override;
     Hit intersect(Ray const& ray, float& distance) override;
 
 };

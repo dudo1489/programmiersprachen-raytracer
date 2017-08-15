@@ -4,15 +4,16 @@
 #include "material.hpp"
 #include "ray.hpp"
 #include "shape.hpp"
+#include <glm/vec3.hpp>
 
 class Shape;
 
 struct Hit 
 {
     Hit();
-    Hit(bool hit, float distance, glm::vec3 const& intersect, glm::vec3 normal, const Shape* shape);
+    Hit(bool hit, float distance, glm::vec3 const& intersect, glm::vec3 const& normal, Shape* const shape);
 
-    
+
 
 
     bool hit_;

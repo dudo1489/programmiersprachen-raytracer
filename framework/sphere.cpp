@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 #include <cmath>
 
-Sphere::~Sphere()
+Sphere::~Sphere() 
 {
    // std::cout<<"destructor sphere"<<"\n";
 }
@@ -52,12 +52,25 @@ std::ostream& Sphere::print(std::ostream& os) const
     <<"Radius: "<<radius_<<"\n";
     return os;
 }
-
-Hit Sphere::intersect(Ray const& ray, float& distance)
+/*
+bool Sphere::intersect(Ray const& ray, float& distance)
 {
     
    auto norm_direction = glm::normalize(ray.direction);
     auto result = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
     return result;
+    
+}
+*/
+
+
+Hit Sphere::intersect(Ray const& ray, float& distance)
+{
+    Hit sphere_hit;
+
+   auto norm_direction = glm::normalize(ray.direction);
+    sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
+   
+    return sphere_hit;
     
 }

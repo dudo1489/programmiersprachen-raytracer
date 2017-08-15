@@ -2,6 +2,9 @@
 #include <cmath>
 
 
+Box::~Box(){}
+
+
 Box::Box():
     Shape{{}, "Box"},
     min_{glm::vec3{0.0f}},
@@ -51,8 +54,9 @@ std::ostream& Box::print(std::ostream& os) const
     <<"Max: ("<<max_.x<<", "<<max_.y<<", "<<max_.z<<")";
     return os;
 }
-
-Hit Box::intersect(Ray const& ray ,float& t)
+/*
+//bool intersect läuft
+bool Box::intersect(Ray const& ray ,float& t)
 {
     
     float tfar;
@@ -101,4 +105,64 @@ Hit Box::intersect(Ray const& ray ,float& t)
    }
 
    return true;
+}
+
+*/
+
+Hit Box::intersect(Ray const& ray ,float& t)
+{   
+    Hit box_hit;
+    
+    float tfar;
+    float tnear;
+
+    float tfarx;
+    float tnearx;
+    float tfary;
+    float tneary;
+    float tfarz;
+    float tnearz;
+
+
+    float tx1 = (min_.x-ray.origin.x)/ray.direction.x;
+    float tx2 = (max_.x-ray.origin.x)/ray.direction.x;
+ 
+    tfarx=std::max(tx1, tx2);
+    tnearx=std::min(tx1, tx2);
+
+    float ty1 = (min_.y-ray.origin.y)/ray.direction.y;
+    float ty2 = (max_.y-ray.origin.y)/ray.direction.y;
+  
+    tfary=std::max(ty1, ty2);
+    tneary=std::min(ty1, ty2);
+
+    float tz1 = (min_.z-ray.origin.z)/ray.direction.z;
+    float tz2 = (max_.z-ray.origin.z)/ray.direction.z;
+
+    tfarz=std::max(tz1, tz2);
+    tnearz=std::min(tz1, tz2);
+
+    tfar=std::max(tfarx, tfary);
+    tnear=std::min(tnearx, tneary);
+
+   if(tfar<tnear)
+   {
+    box_hit.hit_ = false;
+    return box_hit;
+
+   }
+ 
+   tfar=std::min(tfar, tfarz);
+   tnear=std::max(tnear, tnearz);
+
+   if((tfar<0) || (tfar<tnear))
+   {
+        box_hit.hit_ = false;
+        return box_hit;
+
+   }
+
+   box_hit.hit_ = true;
+   
+   return box_hit;
 }
