@@ -12,11 +12,16 @@ Shape::Shape():
     name_{name}
     {} 
 
-Shape::Shape(Material const& mat, String const& name):
+  Shape::Shape(Material const& mat, String const& name):
     material_{mat},
     name_{name}
  //  { std::cout<<"constructor shape"<<"\n";}
-    {}
+    {}  
+
+/* Shape::Shape(std::shared_ptr<Material> mat, String const& name):
+    material_{mat},
+    name_{name}
+    {} */
 
 Shape::~Shape() 
     {}
@@ -24,7 +29,12 @@ Shape::~Shape()
 Material const& Shape::get_material() const
  {
      return material_;
- }
+ } 
+
+/* std::shared_ptr<Material> Shape::get_material()
+{
+    return material_;
+} */
 
 String const& Shape::get_name() const
 {

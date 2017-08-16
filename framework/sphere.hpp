@@ -7,6 +7,7 @@
 #include "shape.hpp"
 #include "ray.hpp"
 
+
 class Sphere: public Shape
 {
     glm::vec3 center_;
@@ -27,7 +28,7 @@ public:
     std::ostream& print(std::ostream& os) const override;
 
    // bool intersect(Ray const& ray, float& distance) override;
-    Hit intersect(Ray const& ray, float& distance) override;
+    Hit intersect(Ray const& ray) override;
 
 };
 

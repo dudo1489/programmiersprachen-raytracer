@@ -61,6 +61,27 @@ struct Color
     tmp -= b;
     return tmp;
   }
+
+  Color& operator *=(Color other)
+  {
+    r *= other.r;
+    g *= other.g;
+    b *= other.b;
+    return *this;
+  }
+
+  Color& operator *=(float other)
+  {
+    r *= other;
+    g *= other;
+    b *= other;
+    return *this;
+  }
+
+  friend Color operator *(Color const& abc, Color const& cba)
+  {
+    return Color(abc) *= cba;
+  }
 };
 
 #endif //#define BUW_COLOR_HPP

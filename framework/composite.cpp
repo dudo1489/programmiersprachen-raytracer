@@ -42,7 +42,7 @@ float Composite::volume() const
         }
     }   
 
-std::ostream& Composite::print(std::ostream& os)
+std::ostream& Composite::print(std::ostream& os) const
     {
          for(auto const& shape : shape_)
         {
@@ -53,7 +53,7 @@ std::ostream& Composite::print(std::ostream& os)
     }
 
 
-Hit Composite::intersect(Ray const& ray ,float& t)
+Hit Composite::intersect(Ray const& ray)
 {
     Hit compost_hit_far;
     Hit compost_hit_close;
@@ -61,7 +61,7 @@ Hit Composite::intersect(Ray const& ray ,float& t)
     bool hitClose;
     for (auto const& shape : shape_)
     {
-        compost_hit_far = shape -> intersect(ray, t);
+        compost_hit_far = shape -> intersect(ray);
         if(compost_hit_far.hit_<compost_hit_close.hit_)
         {
             compost_hit_close.hit_=compost_hit_far.hit_;

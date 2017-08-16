@@ -65,8 +65,46 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
-  Color trace(Ray const & r)
+  Color Renderer::raytrace(Ray const& ray)
   {
-    //scene_.
+    Color color;
+    Hit hit = scene_.composite_ -> intersect(ray);  //alle shapes intersecten und am nahe gelegenste shape zurückgeben
+
+    if(hit.hit_ == true)  //falls es hit gibt mache:
+    {
+      color = ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
+    
+
+      for(auto light : scene_.light_) //gehe über jede lichtquelle
+      {
+         /* color +=  */ pointlight(color, light, hit, ray); //errechne licht an objekt
+      }
+    
+    }
+    //
+
+    return color;
   }
 
+
+  Color Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
+  {
+    color+=(scene_.backgroundclr_)*(ka);
+  }
+
+
+  void Renderer::pointlight(Color & color, std::shared_ptr<Light> const& light,Hit const& hit, Ray const& ray) //berechnet licht an shape
+  {
+    glm::vec3 direction = glm::normalize(light->point_-hit.intersect_); //vector an intersect punkt normalisieren
+    Ray ray_to_light {hit.intersect_+(direction*0.001f), direction}; //ray von intersect punkt zu light erstellen
+
+    //int distance = glm::length(hit.intersect_ - light.point_);  //distance zwischen light und intersect punkt
+
+    Hit lightHit = scene_.composite_ -> intersect(ray_to_light);
+
+    if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
+    {
+      //falls kein hit: berechne diffus und specular light
+    }
+      //falls objekt dazwischen ist wirft es hier schatten
+  }

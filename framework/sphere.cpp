@@ -64,8 +64,9 @@ bool Sphere::intersect(Ray const& ray, float& distance)
 */
 
 
-Hit Sphere::intersect(Ray const& ray, float& distance)
+Hit Sphere::intersect(Ray const& ray)
 {
+    float distance = 0.0f;
     Hit sphere_hit;
 
    auto norm_direction = glm::normalize(ray.direction);

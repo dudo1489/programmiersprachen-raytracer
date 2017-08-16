@@ -1,13 +1,17 @@
-#include <renderer.hpp>
+#include "renderer.hpp"
 #include <window.hpp>
 
 #include <GLFW/glfw3.h>
 #include <thread>
 #include <utility>
 #include <cmath>
-#include "sdfloader.hpp"
+#include <sdfloader.hpp>
 #include <memory>
 #include "scene.hpp"
+#include "shape.hpp"
+#include "ray.hpp"
+#include "composite.hpp"
+
 
 
 int main(int argc, char* argv[])

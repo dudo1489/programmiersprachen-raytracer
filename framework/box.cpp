@@ -2,7 +2,7 @@
 #include <cmath>
 
 
-Box::~Box(){}
+//Box::~Box(){}
 
 
 Box::Box():
@@ -58,7 +58,7 @@ std::ostream& Box::print(std::ostream& os) const
 //bool intersect läuft
 bool Box::intersect(Ray const& ray ,float& t)
 {
-    
+    Box boxhit;
     float tfar;
     float tnear;
 
@@ -109,7 +109,7 @@ bool Box::intersect(Ray const& ray ,float& t)
 
 */
 
-Hit Box::intersect(Ray const& ray ,float& t)
+Hit Box::intersect(Ray const& ray)
 {   
     Hit box_hit;
     

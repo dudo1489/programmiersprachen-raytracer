@@ -25,11 +25,16 @@ public:
 
   void render();
   void write(Pixel const& p);
-  Color trace(Ray const & r);
+  Color raytrace(Ray const& ray);
+  Color ambientlight(Color & color, Color const& ka);
+  
+  void pointlight(Color & color, std::shared_ptr<Light> const& light,Hit const& hit, Ray const& ray);
   inline std::vector<Color> const& colorbuffer() const
   {
     return colorbuffer_;
   }
+
+
 
 private:
   unsigned width_;

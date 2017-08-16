@@ -14,11 +14,10 @@ class Box: public Shape
     Box();
     Box(glm::vec3 const& min, glm::vec3 const& max);
     Box(glm::vec3 const& min, glm::vec3 const& max, Material const& mat, std::string const& name);
-    ~Box() override;
+
     glm::vec3 const& get_min() const;
     glm::vec3 const& get_max() const;
- //   bool intersect(Ray const& ray ,float& t) override;
-    Hit intersect(Ray const& ray ,float& t) override;
+    Hit intersect(Ray const& ray) override;
 
     float area() const override;
     float volume() const override;

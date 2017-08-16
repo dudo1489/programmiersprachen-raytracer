@@ -156,7 +156,7 @@ Scene load(std::string const& file_to_read)
 
                         auto light = std::make_shared<Light>(lightName, point, color, brightness);
 
-                        loadedScene.light_[lightName]=light;
+                        loadedScene.light_.push_back(light);
                     }
     
                  if(keyword == "camera")
