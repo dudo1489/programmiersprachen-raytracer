@@ -33,6 +33,8 @@ void Renderer::render()
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
       Pixel p(x,y);
+      Ray testray;
+      p.color = raytrace(testray);
     /* if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
         p.color = Color(0.0, 1.0, float(x)/height_);
       } else {
@@ -102,9 +104,10 @@ void Renderer::write(Pixel const& p)
 
     Hit lightHit = scene_.composite_ -> intersect(ray_to_light);
 
-    if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
+ /*   if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
     {
       //falls kein hit: berechne diffus und specular light
     }
+ */
       //falls objekt dazwischen ist wirft es hier schatten
   }

@@ -23,3 +23,12 @@
         view_{view},
         fov_x_{fov_x}
         {}
+
+  
+/*
+    Ray Camera::cam_ray(int x, int y, int height, int width) const
+        {
+            return Ray;
+        }
+*/
+
