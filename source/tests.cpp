@@ -207,7 +207,7 @@ TEST_CASE("sphere print", "[print]")
   sphere.print(std::cout);
   std::cout<<"\n";
 }
-/*
+
 
 TEST_CASE("intersectRaySphere", "[intersect]")
 {
@@ -268,15 +268,19 @@ TEST_CASE("intersectRayBox", "[intersect]")
   
   Ray ray{glm::vec3{5.0}, glm::vec3{-1.0, -1.0, -1.0,}};
   
+  Hit test_hit;
+  test_hit = box.intersect(ray, distance);
 
-  REQUIRE(box.intersect(ray, distance) == true);
+  REQUIRE(test_hit.hit_ == true);
 
   float distance2 = 0;
   Ray ray2{glm::vec3{-5.0}, glm::vec3{-50.0, -50.0, -50.0}};
   Box box2{glm::vec3{0.0}, glm::vec3{10.0}};
-  REQUIRE(box2.intersect(ray2, distance2) == false);
 
-}*/
+  test_hit = box2.intersect(ray2, distance2);
+  REQUIRE(test_hit.hit_ == false);
+
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
