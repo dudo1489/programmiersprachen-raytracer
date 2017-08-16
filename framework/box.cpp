@@ -109,7 +109,7 @@ bool Box::intersect(Ray const& ray ,float& t)
 
 */
 
-Hit Box::intersect(Ray const& ray ,float& t)
+Hit Box::intersect(Ray const& ray, float& distance)
 {   
     Hit box_hit;
 
