@@ -19,11 +19,11 @@ install(TARGETS raytracer DESTINATION .)
 #add_executable(aufgabe aufgabe65.cpp)
 
 # Build tests
-add_executable(tests
-  tests.cpp)
-target_link_libraries(tests
-  ${GLFW_LIBRARIES}
-  )
+#add_executable(tests
+#  tests.cpp)
+#target_link_libraries(tests
+#  ${GLFW_LIBRARIES}
+#  )
 
 #Build aufgabe65
 add_executable(aufgabe65 aufgabe65.cpp)

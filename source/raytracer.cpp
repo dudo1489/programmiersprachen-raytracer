@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
   std::cout<<"scene erstellt"<<"\n";
 
 
-  //Renderer app{width, height, filename};
-  Renderer app= Renderer{width, height, filename, sceneToRender};
+  Renderer app{width, height, filename};
+  //Renderer app= Renderer{width, height, filename, sceneToRender};
  
 
   std::thread thr([&app]() { app.render(); });
