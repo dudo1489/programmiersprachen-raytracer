@@ -67,6 +67,7 @@ bool Sphere::intersect(Ray const& ray, float& distance)
 Hit Sphere::intersect(Ray const& ray, float& distance)
 {
     Hit sphere_hit;
+    sphere_hit.shape_ = this;
 
    auto norm_direction = glm::normalize(ray.direction);
     sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);

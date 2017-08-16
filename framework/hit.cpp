@@ -2,7 +2,7 @@
 
 Hit::Hit():
     hit_{false},
-    distance_{9999999},
+    distance_{INFINITY},
     intersect_{999, 999, 999},
     normal_{999, 999, 999},
     shape_{nullptr}

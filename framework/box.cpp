@@ -112,7 +112,9 @@ bool Box::intersect(Ray const& ray ,float& t)
 Hit Box::intersect(Ray const& ray ,float& t)
 {   
     Hit box_hit;
-    
+
+    box_hit.shape_ = this;
+
     float tfar;
     float tnear;
 
@@ -144,6 +146,10 @@ Hit Box::intersect(Ray const& ray ,float& t)
 
     tfar=std::max(tfarx, tfary);
     tnear=std::min(tnearx, tneary);
+
+    box_hit.distance_ = sqrt(ray.direction.x*ray.direction.x+ray.direction.y*ray.direction.y+ray.direction.z*ray.direction.z);
+
+    box_hit.intersect_ = glm::vec3{tnear*ray.direction.x, tnear*ray.direction.y, tnear*ray.direction.z}+ray.origin;
 
    if(tfar<tnear)
    {

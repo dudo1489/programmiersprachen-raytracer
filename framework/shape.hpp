@@ -31,7 +31,7 @@ class Shape
     virtual std::ostream& print(std::ostream& os) const;
 
  //virtual bool intersect(Ray const& ray ,float& t) = 0;
-   virtual Hit intersect(Ray const& ray ,float& t) = 0;
+   virtual Hit intersect(Ray const& ray, float& distance) = 0;
             
 
 
