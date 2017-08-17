@@ -82,6 +82,13 @@ struct Color
   {
     return Color(abc) *= cba;
   }
+
+  friend Color operator*(Color const& a, float b)  //Fürs Skalarprodukt in givacolor!
+  {
+    auto tmp(a);
+    tmp *= b;
+    return tmp;
+}
 };
 
 #endif //#define BUW_COLOR_HPP

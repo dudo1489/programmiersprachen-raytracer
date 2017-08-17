@@ -13,7 +13,9 @@ struct Hit
 {
     Hit();
     Hit(bool hit, float distance, glm::vec3 const& intersect, glm::vec3 const& normal, Shape* const shape);
+    Hit(Hit const& tmp_hit);
 
+    Hit& operator =(Hit const& tmp_hit);
 
 
 

@@ -174,8 +174,8 @@ Scene load(std::string const& file_to_read)
                         ss >> fov_x;
 
                         auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
-
-                        loadedScene.camera_[cameraName]=camera;
+                        
+                        loadedScene.camera_.push_back(camera);
                     } 
 
             }

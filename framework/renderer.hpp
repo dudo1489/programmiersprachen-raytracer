@@ -27,6 +27,8 @@ public:
   void write(Pixel const& p);
   Color raytrace(Ray const& ray);
   Color ambientlight(Color & color, Color const& ka);
+  void specularlight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight, Ray const& ray);
+  void diffuselight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight);
   
   void pointlight(Color & color, std::shared_ptr<Light> const& light,Hit const& hit, Ray const& ray);
   inline std::vector<Color> const& colorbuffer() const
