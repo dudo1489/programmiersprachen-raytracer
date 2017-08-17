@@ -25,7 +25,6 @@
         name_{name},
         position_{position},
         view_{view},
-<<<<<<< HEAD
         fov_x_{fov_x},
         direction_{direction},
         upVector_{upVector}
@@ -57,16 +56,3 @@
         transformCam[3] = glm::vec4 {e, 1.0f};
     
     }
-=======
-        fov_x_{fov_x}
-        {}
-
-  
-/*
-    Ray Camera::cam_ray(int x, int y, int height, int width) const
-        {
-            return Ray;
-        }
-*/
-
->>>>>>> 2c9fad5a9c3c599e4a93a106ade3b4557be155a9
