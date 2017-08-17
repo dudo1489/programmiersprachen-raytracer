@@ -12,7 +12,7 @@ struct Ray
 
     Ray():
     origin{glm::vec3{0.0}},
-    direction{glm::vec3{1.0}}
+    direction{glm::vec3{-1.0}}
     {}
 
     Ray(glm::vec3 origin, glm::vec3 direction):

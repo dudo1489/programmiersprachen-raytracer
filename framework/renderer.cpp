@@ -33,9 +33,14 @@ void Renderer::render()
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
       Pixel p(x,y);
+<<<<<<< HEAD
       Ray testray{{0.0, 0.0, 0.0}, {10.0, 20.0, 30.0}}; //= scene_.camera_.calc_eye_ray(x, y, height_, width_);
       p.color = raytrace(testray);
 
+=======
+      Ray testray;
+      p.color = raytrace(testray);
+>>>>>>> 2c9fad5a9c3c599e4a93a106ade3b4557be155a9
     /* if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
         p.color = Color(0.0, 1.0, float(x)/height_);
       } else {
@@ -107,12 +112,21 @@ void Renderer::write(Pixel const& p)
 
     Hit lightHit = scene_.composite_ -> intersect(ray_to_light);
 
+<<<<<<< HEAD
      if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
+=======
+ /*   if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
+>>>>>>> 2c9fad5a9c3c599e4a93a106ade3b4557be155a9
     {
       diffuselight(color, hit, light, ray_to_light);
       specularlight(color, hit, light, ray_to_light, ray);
       //falls kein hit: berechne diffus und specular light
+<<<<<<< HEAD
     } 
+=======
+    }
+ */
+>>>>>>> 2c9fad5a9c3c599e4a93a106ade3b4557be155a9
       //falls objekt dazwischen ist wirft es hier schatten
   }
 
