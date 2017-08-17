@@ -157,6 +157,7 @@ Scene load(std::string const& file_to_read)
                         auto light = std::make_shared<Light>(lightName, point, color, brightness);
 
                         loadedScene.light_.push_back(light);
+                        std::cout << "added light \n";
                     }
     
                  if(keyword == "camera")
@@ -176,6 +177,7 @@ Scene load(std::string const& file_to_read)
                         auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
                         
                         loadedScene.camera_.push_back(camera);
+                        std::cout << "added camera \n";
                     } 
 
             }

@@ -33,7 +33,7 @@ void Renderer::render()
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
       Pixel p(x,y);
-      Ray testray{{0.0, 0.0, 0.0}, {10.0, 20.0, 30.0}}; //= scene_.camera_.calc_eye_ray(x, y, height_, width_);
+      Ray testray; //= scene_.camera_.calc_eye_ray(x, y, height_, width_);
       p.color = raytrace(testray);
 
     /* if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
@@ -79,12 +79,13 @@ void Renderer::write(Pixel const& p)
       Color color;
       color = ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
     
-
+    std::cout << "passiert hier etwas ? \n";
       for(auto light : scene_.light_) //gehe über jede lichtquelle
       {
           /* color += */  pointlight(color, light, hit, ray); //errechne licht an objekt
       }
     return color;
+    std::cout << "wird color zurückgegeben?? \n";
     }
     //
 

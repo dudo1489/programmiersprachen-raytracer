@@ -38,7 +38,7 @@
         auto transformedCam = transformCam();
 
         return camRay.transformRay(transformedCam);
-    } */
+    } */  
 
     glm::mat4 Camera::transformCam() const
     {    
