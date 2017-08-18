@@ -16,7 +16,7 @@ struct Color
 {
 
   Color():
-  r(0),
+  r(1),
   g(0),
   b(0)
   {}

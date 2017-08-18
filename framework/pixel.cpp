@@ -13,7 +13,7 @@
 Pixel::Pixel(unsigned int a, unsigned int b)
   : x(a),
     y(b),
-    color(0.0,0.0,0.0)
+    color(0.5,0.5,0.5)
 {}
 
 void Pixel::print(std::ostream& os) const
@@ -23,7 +23,6 @@ void Pixel::print(std::ostream& os) const
      << color.g << ','
      << color.b << ')';
 }
-
 
 
 std::ostream& operator<<(std::ostream& os, const Pixel& a)

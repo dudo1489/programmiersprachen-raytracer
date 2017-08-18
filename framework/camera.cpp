@@ -6,7 +6,6 @@
     Camera::Camera():
         name_{"default"},
         position_{0.0, 0.0, 0.0},
-        view_{0.0, 0.0, -1.0},
         fov_x_{45.0},
         direction_{0.0, 0.0, -1.0},
         upVector_{0.0, 0.0, 0.0}
@@ -15,16 +14,14 @@
     Camera::Camera(std::string const& name, glm::vec3 const& position, float fov_x):
         name_{name},
         position_{position},
-        view_{0.0, 0.0, -1.0},//muss nóch für die z achse einen negativeren wert bekommen als position
         fov_x_{fov_x},
         direction_{0.0, 0.0, -1.0},
         upVector_{0.0, 0.0, 0.0}
         {}
 
-    Camera::Camera(std::string const& name, glm::vec3 const& position, glm::vec3 const& view, float fov_x, glm::vec3 direction, glm::vec3 upVector):
+    Camera::Camera(std::string const& name, glm::vec3 const& position, float fov_x, glm::vec3 direction, glm::vec3 upVector):
         name_{name},
-        position_{position},
-        view_{view},
+        position_{position}, 
         fov_x_{fov_x},
         direction_{direction},
         upVector_{upVector}

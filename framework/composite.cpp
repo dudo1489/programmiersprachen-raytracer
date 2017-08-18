@@ -61,12 +61,12 @@ Hit Composite::intersect(Ray const& ray)
     for (auto const& shape : shape_)
     {
         hit_far = shape -> intersect(ray);
-        if(hit_far.distance_<hit_close.distance_)
+        if(hit_far.distance_ < hit_close.distance_)
         {
             hit_close = hit_far;
         }
-        
-        return hit_far; 
+    
+    return hit_close;
     }
 }
   

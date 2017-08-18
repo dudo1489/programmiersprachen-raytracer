@@ -21,14 +21,14 @@ float brightness_;
         point_{0.0},
         color_{},
         brightness_{}
-        {}
+        {std::cout << "Konstrukt def. light";}
 
     Light(std::string const& name, glm::vec3 const& point,Color color, float brightness):
         name_{name},
         point_{point},
         color_{color},
         brightness_{brightness}
-        {}
+        {std::cout << "Konstrukt light";}
 
 
 };
