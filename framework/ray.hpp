@@ -21,9 +21,9 @@ struct Ray
     direction{direction}
     {}
 
-    //Ray& transformRay(glm::mat4 const& mat);
+    Ray& transformRay(glm::mat4 const& mat);
 
-    /* friend Ray transformRay(glm::mat4x4 const& trans_mat_inv, Ray const& Ray)
+    /*friend Ray transformRay(glm::mat4x4 const& trans_mat_inv, Ray const& Ray)
     {
         Ray newray;
         glm::vec3 origin(trans_mat_inv*glm::vec4(newray.origin,1));
@@ -40,5 +40,5 @@ struct Ray
 
 };
 
-//Ray transformRay(glm::mat4 const& mat, Ray& ray);
+Ray transformRay(glm::mat4 const& mat, Ray& ray);
 #endif

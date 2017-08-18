@@ -55,6 +55,7 @@ Scene load(std::string const& file_to_read)
                     loadedScene.materials_[material.name_]=material;    //material in scene ueberschreiben
                                                                         //wird nach keyword in die map materials_ eingeordnet
                     std::cout << "added material: " << material.name_ << "\n";
+                    std::cout << "material: " << material.name_ << "\n";
                 }
 
 

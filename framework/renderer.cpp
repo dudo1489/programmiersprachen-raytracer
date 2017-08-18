@@ -29,11 +29,11 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const&
 void Renderer::render()
 {
   //const std::size_t checkersize = 20;
-
+  float distance =-(float(width_)/2)/tan(M_PI*scene_.camera_[0]->fov_x_/(2*180));
   for (unsigned y = 0; y < height_; ++y) {
     for (unsigned x = 0; x < width_; ++x) {
       Pixel p(x,y);
-      Ray testray; //= scene_.camera_.calc_eye_ray(x, y, height_, width_);
+      Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
       p.color = raytrace(testray);
       
       
@@ -45,7 +45,7 @@ void Renderer::render()
       }
     */
 
-       //std::cout<<"Pixel"<<x<<","<<y<<"\n";
+       std::cout<<"Pixel"<<x<<","<<y<<"\n";
   //    p.color = Color(1.0, 0.0, 1.0);//berechnet aus 
 
       write(p);
@@ -72,37 +72,37 @@ void Renderer::write(Pixel const& p)
 
   Color Renderer::raytrace(Ray const& ray)
   {
-    
-    //std::cout << "test \n";
     Hit hit = scene_.composite_ -> intersect(ray);  //alle shapes intersecten und am nahe gelegenste shape zurückgeben
-    //std::cout << "kommt was? \n";
-    //std::cout << "LIGHT: "<<scene_.light_.size()<<"\n";
+
     if(hit.hit_ == true)  //falls es hit gibt mache:
     { 
 
       Color color;
-      color = ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
-    
-      //std::cout << "passiert hier etwas ? \n";
-      //std::cout << "LIGHT: "<<scene_.light_.size()<<"\n";
+      ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
+      std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+
       for(auto light : scene_.light_) //gehe über jede lichtquelle
       {
-        std::cout << "davor 2 \n";
+        
         /*color += */  pointlight(color, light, hit, ray); //errechne licht an objekt
-        std::cout << "davor 2\n";
+        
       }
-      //std::cout << "wird color zurückgegeben?? \n";
+     
+    std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
     return color;
     }
     
-    else
-     return scene_.backgroundclr_;
+    else{
+        std::cout << "no hit color:" <<scene_.backgroundclr_.r << ","<<scene_.backgroundclr_.g <<"," << scene_.backgroundclr_.b <<"\n";
+        return scene_.backgroundclr_;}
   }
 
 
-  Color Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
+  void Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
   {
-    color+=(scene_.backgroundclr_);//*(ka);
+    color+=(scene_.backgroundclr_)*(ka);
+    std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+    std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","<<scene_.light_[0]->brightness_<< ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";
   }
 
 
@@ -118,11 +118,11 @@ void Renderer::write(Pixel const& p)
 
      if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
     {
-      diffuselight(color, hit, light, ray_to_light);
-      specularlight(color, hit, light, ray_to_light, ray);
+      //diffuselight(color, hit, light, ray_to_light);
+      //specularlight(color, hit, light, ray_to_light, ray);
       //falls kein hit: berechne diffus und specular light
     } 
-   
+      std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       //falls objekt dazwischen ist wirft es hier schatten
   }
 
@@ -130,8 +130,7 @@ void Renderer::write(Pixel const& p)
   void Renderer::diffuselight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight)
       {
         float faktor=(glm::dot((Hitze.normal_) , raylight.direction));
-        clr+= (light->color_) * (Hitze.shape_->get_material().kd_) * (std::max(faktor,0.0f));  
-        std::cout << "wird color zurückgegeben?? \n";
+        clr+= (light->color_) * (Hitze.shape_->get_material().kd_) * (std::max(faktor,0.0f));       
       }
 
 
@@ -140,5 +139,4 @@ void Renderer::write(Pixel const& p)
         auto r = glm::normalize(glm::reflect(raylight.direction, Hitze.normal_));
         float cosb = std::max(0.0f, glm::dot(r, glm::normalize(ray.direction)));          //evtl hier nochmal mit transf. ray probieren!
         clr+= light->color_ * Hitze.shape_->get_material().ks_ * pow(cosb, Hitze.shape_->get_material().m_);
-        std::cout << "wird color zurückgegeben?? \n";
       }
