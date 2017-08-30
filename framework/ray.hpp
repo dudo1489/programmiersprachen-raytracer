@@ -8,18 +8,15 @@
 
 struct Ray
 {
-    glm::vec3 origin;
-    glm::vec3 direction;
-    glm::vec3 inv_direction;
 
     Ray():
     origin{glm::vec3{0.0}},
     direction{glm::vec3{-1.0}}
     {}
 
-    Ray(glm::vec3 origin, glm::vec3 direction):
+    Ray(glm::vec3 const& origin, glm::vec3 const& direction):
     origin{origin},
-    direction{direction}
+    direction{glm::normalize(direction)}
     {}
 
     Ray& transformRay(glm::mat4 const& mat);
@@ -37,7 +34,9 @@ struct Ray
         return newray;
     } */
     
-    
+    glm::vec3 origin;
+    glm::vec3 direction;
+    glm::vec3 inv_direction;
 
 };
 

@@ -49,7 +49,7 @@
         Ray camRay{position_, view};
         auto transformedCam = transformCam();
 
-        return camRay;//.transformRay(transformedCam);
+        return camRay.transformRay(transformedCam);
     } 
     
      
