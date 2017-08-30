@@ -115,6 +115,10 @@ Hit Box::intersect(Ray const& ray)
 
     box_hit.shape_ = this;
 
+    Ray temp_ray;
+    temp_ray.direction = glm::normalize(ray.direction);
+    temp_ray.origin = ray.origin;
+
     float tfar;
     float tnear;
 
@@ -172,3 +176,103 @@ Hit Box::intersect(Ray const& ray)
    
    return box_hit;
 }
+/*
+
+Hit Box::intersect(Ray const& inray){
+  float hit_x = 0.0;
+  float hit_y = 0.0;
+  float hit_z = 0.0;
+  float dis = 0.0;
+  Hit boxhit;
+  Ray ray;
+  ray.direction = glm::normalize(inray.direction);
+  ray.origin = inray.origin;
+
+
+  glm::vec3 hitvec{glm::vec3{0.0}};
+
+  if(ray.origin.x <= min_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x < 0))
+  {
+    hitvec.x = min_.x;  
+  }
+  else if(ray.origin.x >= max_.x || (ray.origin.x > min_.x && ray.origin.x < max_.x && ray.direction.x > 0))
+  {
+    hitvec.x = max_.x;  
+  }
+
+  if(ray.origin.y <= min_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y < 0))
+  {
+    hitvec.y = min_.y;  
+  }
+  else if(ray.origin.y >= max_.y || (ray.origin.y > min_.y && ray.origin.y < max_.y && ray.direction.y > 0))
+  {
+    hitvec.y = max_.y;  
+  }
+
+  if(ray.origin.z <= min_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z < 0))
+  {
+    hitvec.z = min_.z;  
+  }
+  else if(ray.origin.z >= max_.z || (ray.origin.z > min_.z && ray.origin.z < max_.z && ray.direction.z > 0))
+  {
+    hitvec.z = max_.z;  
+  }
+
+  dis = (hitvec.x - ray.origin.x)/ray.direction.x;
+  hit_y = ray.origin.y + dis*ray.direction.y;
+  hit_z = ray.origin.z + dis*ray.direction.z;;
+  
+  if(hit_y >= min_.y && hit_y <= max_.y && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
+    boxhit.hit_ = true;
+    boxhit.distance_ = dis;
+    boxhit.intersect_ = ray.origin + ray.direction * boxhit.distance_;
+    if(hitvec.x == min_.x){
+      boxhit.normal_ = glm::vec3{-1.0,0.0,0.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{1.0,0.0,0.0};
+    }
+    boxhit.shape_ = this;
+    return boxhit;
+  }
+
+  dis = (hitvec.y - ray.origin.y)/ray.direction.y;
+  hit_x = ray.origin.x + dis*ray.direction.x;
+  hit_z = ray.origin.z + dis*ray.direction.z;;
+  
+  if(hit_x >= min_.x && hit_x <= max_.x && hit_z >= min_.z && hit_z <= max_.z && dis >= 0){
+    boxhit.hit_ = true;
+    boxhit.distance_ = dis;
+    boxhit.intersect_ = ray.origin + ray.direction * boxhit.distance_;
+    if(hitvec.y == min_.y){
+      boxhit.normal_ = glm::vec3{0.0,-1.0,0.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{0.0,1.0,0.0};
+    }
+    boxhit.shape_ = this;    
+    return boxhit;
+  }
+
+  dis = (hitvec.z - ray.origin.z)/ray.direction.z;
+  hit_x = ray.origin.x + dis*ray.direction.x;
+  hit_y = ray.origin.y + dis*ray.direction.y;;
+  
+  if(hit_x >= min_.x && hit_x <= max_.x && hit_y >= min_.y && hit_y <= max_.y && dis >= 0){
+    boxhit.hit_ = true;
+    boxhit.distance_ = dis;
+    boxhit.intersect_ = ray.origin + ray.direction * boxhit.distance_;
+    if(hitvec.z == min_.z){
+      boxhit.normal_ = glm::vec3{0.0,0.0,-1.0};
+      }
+    else{
+      boxhit.normal_ = glm::vec3{0.0,0.0,1.0};
+    }
+    boxhit.shape_ = this;
+    return boxhit;
+  }
+
+  boxhit.hit_ = false;
+  return boxhit;
+}
+*/

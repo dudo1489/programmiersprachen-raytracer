@@ -2,6 +2,7 @@
 #define RAY_HPP
 
 #include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 
@@ -40,5 +41,5 @@ struct Ray
 
 };
 
-Ray transformRay(glm::mat4 const& mat, Ray& ray);
+    Ray transformRay(glm::mat4 const& mat, Ray& ray);
 #endif

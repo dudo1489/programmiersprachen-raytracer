@@ -164,20 +164,32 @@ Scene load(std::string const& file_to_read)
                  if(keyword == "camera")
                     {
                         std::string cameraName;
-                        glm::vec3 position;
+                        glm::vec3 camera_position;
+                        glm::vec3 camera_direction;
+                        glm::vec3 camera_up;
                         float fov_x;
 
                         ss >> cameraName;
 
-                        ss >> position.x;
-                        ss >> position.y;
-                        ss >> position.z;
-
                         ss >> fov_x;
 
-                        auto camera = std::make_shared<Camera>(cameraName, position, fov_x);    
+                        ss >> camera_position.x;
+                        ss >> camera_position.y;
+                        ss >> camera_position.z;                        
+
+                        ss >> camera_direction.x;
+                        ss >> camera_direction.y;
+                        ss >> camera_direction.z;                        
+
+                        ss >> camera_up.x;
+                        ss >> camera_up.y;
+                        ss >> camera_up.z;
+
+
+
+                        Camera sdf_camera{cameraName, fov_x, camera_position, camera_direction, camera_up};    
                         
-                        loadedScene.camera_.push_back(camera);
+                        loadedScene.camera_= sdf_camera;
                         std::cout << "added camera \n";
                     } 
 

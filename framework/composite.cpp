@@ -55,15 +55,15 @@ std::ostream& Composite::print(std::ostream& os) const
 
 Hit Composite::intersect(Ray const& ray)
 {
-    Hit hit_far;
+    Hit hit_temp;
     Hit hit_close;
 
     for (auto const& shape : shape_)
     {
-        hit_far = shape -> intersect(ray);
-        if(hit_far.distance_ < hit_close.distance_)
+        hit_temp = shape -> intersect(ray);
+        if(hit_temp.distance_ < hit_close.distance_)
         {
-            hit_close = hit_far;
+            hit_close = hit_temp;
         }
     
     return hit_close;

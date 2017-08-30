@@ -8,10 +8,10 @@
         position_{0.0, 0.0, 0.0},
         fov_x_{45.0},
         direction_{0.0, 0.0, -1.0},
-        upVector_{0.0, 0.0, 0.0}
+        upVector_{0.0, 1.0, 0.0}
         {}
 
-    Camera::Camera(std::string const& name, glm::vec3 const& position, float fov_x):
+    Camera::Camera(std::string const& name, float fov_x, glm::vec3 const& position):
         name_{"name"},
         position_{position},
         fov_x_{fov_x},
@@ -19,25 +19,41 @@
         upVector_{0.0, 1.0, 0.0}
         {}
 
-    Camera::Camera(std::string const& name, glm::vec3 const& position, float fov_x, glm::vec3 direction, glm::vec3 upVector):
+    Camera::Camera(std::string const& name, float fov_x, glm::vec3 const& position, glm::vec3 direction, glm::vec3 upVector):
         name_{name},
         position_{position}, 
         fov_x_{fov_x},
         direction_{direction},
         upVector_{upVector}
-        {}
+        {std::cout<<"Camera "<< name_<<" erstellt. Mit fov_x = "<<fov_x_<<" and Position: "<<position_.x<<" , "<<position_.y<<" , "<<position_.z<<" and direction_: "<<direction_.x<<" , "<<direction_.y<<" , "<<direction_.z<<" and upVector_: "<<upVector_.x<<" , "<<upVector_.y<<" , "<<upVector_.z<<"\n";}
 
-    /*
-    Ray Camera::calc_eye_ray(int x,int y, int height, int width)
+    Camera::~Camera() {}
+/*
+    Ray Camera::generate_ray(float x_position, float y_position, float distance) const
     {
-        glm::vec3 view{float(x)*1.0/float(width)-0.5, float(y) * 1.0/float(height)-0.5, -1.0*(0.5/tan(fov_x_/2))};
+
+        Ray position_ray{position_, glm::vec3{x_position, y_position, -(distance)}};
+
+        return position_ray;
+    }
+
+  */  
+    Ray Camera::generate_ray(int x,int y, int height, int width) const
+    {
+        glm::vec3 view
+                    { 
+                        (float(x)/(float(width)))-0.5, 
+                        (float(y)/(float(height)))-0.5, 
+                        -1.0*(0.5/tan(fov_x_/2))
+                    };
         Ray camRay{position_, view};
         auto transformedCam = transformCam();
 
-        return camRay.transformRay(transformedCam);
+        return camRay;//.transformRay(transformedCam);
     } 
-    */  
-    /*glm::mat4 Camera::transformCam() const
+    
+     
+    glm::mat4 Camera::transformCam() const
     {    
         glm::vec3 e = position_;
         glm::vec3 n = glm::normalize(direction_);
@@ -51,5 +67,7 @@
         transformCam[1] = glm::vec4 {v, 0.0f};
         transformCam[2] = glm::vec4 {n * -1.0f, 0.0f};
         transformCam[3] = glm::vec4 {e, 1.0f};
+
+        return transformCam;
     
-    }*/
+    }
