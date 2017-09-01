@@ -15,3 +15,4 @@ Ray transformRay(glm::mat4 const& mat, Ray& ray)
     return ray.transformRay(mat);
 
 }
+

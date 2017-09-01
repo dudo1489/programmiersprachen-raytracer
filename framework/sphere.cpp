@@ -78,9 +78,9 @@ Hit Sphere::intersect(Ray const& ray)
    
 }
 */
-
-  Hit Sphere::intersect(Ray const& ray)
-  {
+  
+Hit Sphere::intersect(Ray const& ray)
+{
     float distance = INFINITY;
   // Hit intersect_hit;
  //   intersect_hit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
@@ -91,20 +91,22 @@ Hit Sphere::intersect(Ray const& ray)
     
     if (hit == true)
     {  
-      glm::vec3 surface_pt = ray.origin + distance * ray.direction;
-      std::cout<< "surfacepoints" << surface_pt.x <<"   "<<surface_pt.y<<"   "<<surface_pt.z<<"\n";
+      glm::vec3 intersection_point = ray.origin + distance * ray.direction;
+      std::cout<< "surfacepoints" << intersection_point.x <<"   "<<intersection_point.y<<"   "<<intersection_point.z<<"\n";
       
-      glm::vec3 normalen_vec = glm::normalize(surface_pt - center_);
+      glm::vec3 normalen_vec = glm::normalize(intersection_point - center_);
       std::cout<< "normalen_vec" << normalen_vec.x <<"   "<<normalen_vec.y<<"   "<<normalen_vec.z<<"\n";
 
       std::cout<< "distance vom hit "<<distance << "\n";
 
-      return Hit{true, distance, surface_pt, normalen_vec, this};
+      return Hit{true, distance, intersection_point, normalen_vec, this};
     }
 
     std::cout<< "distance vom nicht hit: "<<distance << "\n";
 
     return Hit{};
-    }
+}
 
+glm::vec3 Sphere::calculate_normale(Hit const& hit)const
+{}
     

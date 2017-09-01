@@ -6,6 +6,7 @@
 #include "ray.hpp"
 #include "hit.hpp"
 #include <memory>
+#include <glm/glm.hpp>
 
 typedef std::string String;
 
@@ -15,6 +16,8 @@ class Shape
 {
     Material material_;
     String name_;
+    glm::mat4 transform_;
+    glm::mat4 transform_inv_;
 
  public:
     
@@ -29,14 +32,16 @@ class Shape
 
     Material const& get_material() const;
     String const& get_name() const;
-
+    glm::mat4 get_transform_() const;
+    glm::mat4 get_transform_inv_() const;
     //std::shared_ptr<Material> get_material();
 
     virtual std::ostream& print(std::ostream& os) const;
 
  //virtual bool intersect(Ray const& ray ,float& t) = 0;
-   virtual Hit intersect(Ray const& ray) = 0;
-            
+    virtual Hit intersect(Ray const& ray) = 0;
+    virtual glm::vec3 calculate_normale(Hit const& hit) const = 0;
+
 
 
 };

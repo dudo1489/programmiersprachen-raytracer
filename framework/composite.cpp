@@ -57,10 +57,12 @@ Hit Composite::intersect(Ray const& ray)
 {
     Hit hit_temp;
     Hit hit_close;
+    std::cout<<"shape_ size: "<< shape_.size()<<"\n";
 
-    for (auto const& shape : shape_)
+    for (auto const& i : shape_)
     {
-        hit_temp = shape -> intersect(ray);
+        std::cout<<"\n"<<i<<"\n";
+        hit_temp = i -> intersect(ray);
         if(hit_temp.distance_ < hit_close.distance_)
         {
             hit_close = hit_temp;
@@ -69,4 +71,9 @@ Hit Composite::intersect(Ray const& ray)
     return hit_close;
     }
 }
+
+glm::vec3 Composite::calculate_normale(Hit const& hit) const
+{}
+
+
   

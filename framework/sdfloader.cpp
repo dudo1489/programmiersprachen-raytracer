@@ -131,7 +131,7 @@ Scene load(std::string const& file_to_read)
                             if(shape_to_insert != shape_ptr.end())
                             {
                             loadedScene.composite_ -> add_shape(shape_to_insert -> second);
-                            std::cout << "added composite: " << compositeName << "\n"; 
+                            std::cout << "added "<<shapeName<<" to Composite: " << compositeName << "\n"; 
                             
                             }
                         } 

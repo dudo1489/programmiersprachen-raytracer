@@ -4,6 +4,9 @@
 #include "shape.hpp"
 #include <glm/vec3.hpp>
 #include "ray.hpp"
+#include <catch.hpp>
+#include <algorithm>
+
 
 class Box: public Shape
 {
@@ -17,7 +20,11 @@ class Box: public Shape
 
     glm::vec3 const& get_min() const;
     glm::vec3 const& get_max() const;
+
+
     Hit intersect(Ray const& ray) override;
+    
+    glm::vec3 calculate_normale(Hit const& hit) const override;
 
     float area() const override;
     float volume() const override;

@@ -30,7 +30,7 @@ void Renderer::render()
 {
   //const std::size_t checkersize = 20;
  // float distance = -(float(width_)/2)/tan(M_PI*scene_.camera_.fov_x_/(2*180));
-  std::cout << "Size of composite: " << scene_.composite_->shape_.size() <<"\n \n";
+ // std::cout << "Size of composite: " << scene_.composite_->shape_.size() <<"\n \n";
 
   float distance = 400;
 
@@ -96,11 +96,11 @@ void Renderer::write(Pixel const& p)
 
       Color color = hit.shape_->get_material().ka_;
 
-     // ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
+      ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
 
       std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
 
-    /*  
+     
 
     for(auto light : scene_.light_) //gehe über jede lichtquelle
         {
@@ -111,7 +111,7 @@ void Renderer::write(Pixel const& p)
      
       std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       
-    */
+    
       return color;
     }
     

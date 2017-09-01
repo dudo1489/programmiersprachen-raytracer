@@ -3,9 +3,17 @@
 Hit::Hit():
     hit_{false},
     distance_{INFINITY},
-    intersect_{999, 999, 999},
-    normal_{999, 999, 999},
+    intersect_{},
+    normal_{},
     shape_{nullptr}
+    {}
+
+Hit::Hit(Shape* const shape):  
+    hit_{false},
+    distance_{INFINITY},
+    intersect_{},
+    normal_{},
+    shape_{shape}
     {}
 
 
