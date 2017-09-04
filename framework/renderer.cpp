@@ -51,13 +51,11 @@ void Renderer::render()
   //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
   //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
       Ray temp_ray = scene_.camera_.generate_ray(x, y, height_, width_);
-    
+      Color tempcolor;
       //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
-      p.color = raytrace(temp_ray);
-<<<<<<< HEAD
-      ToneMapping(p.color);
-=======
->>>>>>> f85b0ebde295bc206e5e0705d8a710b1b3f286cc
+      tempcolor = raytrace(temp_ray);
+
+      p.color = ToneMapping(tempcolor);
 
   /*    if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
           p.color = Color(0.0, 1.0, float(x)/height_);
@@ -116,10 +114,6 @@ void Renderer::write(Pixel const& p)
       std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       
     
-<<<<<<< HEAD
-
-=======
->>>>>>> f85b0ebde295bc206e5e0705d8a710b1b3f286cc
       return color;
     }
     
