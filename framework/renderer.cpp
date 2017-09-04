@@ -46,7 +46,7 @@ void Renderer::render()
     {
       ++pos_x;
       Pixel p(x,y);
-      std::cout<<"\n \n"<<"Pixel "<<x<<", "<<y<<"\n \n";
+      std::cout<<"\n"<<"Pixel "<<x<<", "<<y<<"\n";
 
   //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
   //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
@@ -127,9 +127,10 @@ void Renderer::write(Pixel const& p)
   {
     color+=(scene_.backgroundclr_)*(ka);
     std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-    std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","
+   /* std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","
                                   <<scene_.light_[0]->brightness_<< 
                                   ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";
+ */
   }
 
 

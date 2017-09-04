@@ -52,40 +52,14 @@ std::ostream& Sphere::print(std::ostream& os) const
     <<"Radius: "<<radius_<<"\n";
     return os;
 }
-/*
-bool Sphere::intersect(Ray const& ray, float& distance)
-{
-    
-   auto norm_direction = glm::normalize(ray.direction);
-    auto result = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
-    return result;
-    
-}
-*/
 
-/*
-Hit Sphere::intersect(Ray const& ray)
-{
-    float distance = 0.0f;
-    Hit sphere_hit;
-    sphere_hit.shape_ = this;
-    sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
-
-   auto norm_direction = glm::normalize(ray.direction);
-    sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
-   
-    return sphere_hit;
-   
-}
-*/
-  
 Hit Sphere::intersect(Ray const& ray)
 {
     float distance = INFINITY;
   // Hit intersect_hit;
  //   intersect_hit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
-    std::cout << "ray.origin: " << ray.origin.x<<"     " <<ray.origin.y<<"    "<< ray.origin.z <<"    "<< "\n";
-     std::cout << "ray.direction: " << ray.direction.x<<"     "<< ray.direction.y<<"     "<< ray.direction.z <<"\n";
+  //  std::cout << "ray.origin: " << ray.origin.x<<"     " <<ray.origin.y<<"    "<< ray.origin.z <<"    "<< "\n";
+   //  std::cout << "ray.direction: " << ray.direction.x<<"     "<< ray.direction.y<<"     "<< ray.direction.z <<"\n";
 
     bool hit = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
     
@@ -101,8 +75,6 @@ Hit Sphere::intersect(Ray const& ray)
 
       return Hit{true, distance, intersection_point, normalen_vec, this};
     }
-
-    std::cout<< "distance vom nicht hit: "<<distance << "\n";
 
     return Hit{};
 }
