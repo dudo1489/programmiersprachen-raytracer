@@ -29,25 +29,41 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const&
 void Renderer::render()
 {
   //const std::size_t checkersize = 20;
-  float distance =-(float(width_)/2)/tan(M_PI*scene_.camera_[0]->fov_x_/(2*180));
-  for (unsigned y = 0; y < height_; ++y) {
-    for (unsigned x = 0; x < width_; ++x) {
+ // float distance = -(float(width_)/2)/tan(M_PI*scene_.camera_.fov_x_/(2*180));
+ // std::cout << "Size of composite: " << scene_.composite_->shape_.size() <<"\n \n";
+
+  float distance = 400;
+
+  float pos_y = (((float)height_) / -2);
+
+  for (unsigned y = 0; y < height_; ++y) 
+  {
+    ++pos_y;
+
+    float pos_x = (((float)width_) / -2);
+
+    for (unsigned x = 0; x < width_; ++x) 
+    {
+      ++pos_x;
       Pixel p(x,y);
-      Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
-      p.color = raytrace(testray);
-      
-      
+      std::cout<<"\n"<<"Pixel "<<x<<", "<<y<<"\n";
 
-    /* if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
-        p.color = Color(0.0, 1.0, float(x)/height_);
-      } else {
-        p.color = Color(1, 0.0, .0float(y)/width_);
-      }
-    */
+  //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
+  //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
+      Ray temp_ray = scene_.camera_.generate_ray(x, y, height_, width_);
+    
+      //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
+      p.color = raytrace(temp_ray);
+      ToneMapping(p.color);
 
-       std::cout<<"Pixel"<<x<<","<<y<<"\n";
+  /*    if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
+          p.color = Color(0.0, 1.0, float(x)/height_);
+          } else {
+          p.color = Color(1, 0.0, .0float(y)/width_);
+        }
+  */
+
   //    p.color = Color(1.0, 0.0, 1.0);//berechnet aus 
-
       write(p);
     }
   }
@@ -72,37 +88,51 @@ void Renderer::write(Pixel const& p)
 
   Color Renderer::raytrace(Ray const& ray)
   {
+
     Hit hit = scene_.composite_ -> intersect(ray);  //alle shapes intersecten und am nahe gelegenste shape zurückgeben
+
 
     if(hit.hit_ == true)  //falls es hit gibt mache:
     { 
 
-      Color color;
+      Color color = hit.shape_->get_material().ka_;
+
       ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
+
       std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
 
-      for(auto light : scene_.light_) //gehe über jede lichtquelle
-      {
-        
-        /*color += */  pointlight(color, light, hit, ray); //errechne licht an objekt
-        
-      }
      
-    std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-    return color;
+
+    for(auto light : scene_.light_) //gehe über jede lichtquelle
+        {
+          
+            pointlight(color, light, hit, ray); //errechne licht an objekt
+          
+        }
+     
+      std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+      
+    
+
+      return color;
     }
     
-    else{
+    else
+    {
         std::cout << "no hit color:" <<scene_.backgroundclr_.r << ","<<scene_.backgroundclr_.g <<"," << scene_.backgroundclr_.b <<"\n";
+        
         return scene_.backgroundclr_;}
-  }
+    }
 
 
   void Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
   {
     color+=(scene_.backgroundclr_)*(ka);
     std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-    std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","<<scene_.light_[0]->brightness_<< ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";
+   /* std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","
+                                  <<scene_.light_[0]->brightness_<< 
+                                  ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";
+ */
   }
 
 
@@ -112,14 +142,14 @@ void Renderer::write(Pixel const& p)
     glm::vec3 direction = glm::normalize(light->point_- hit.intersect_); //vector an intersect punkt normalisieren
     Ray ray_to_light {hit.intersect_+(direction*0.001f), direction}; //ray von intersect punkt zu light erstellen
 
-    //int distance = glm::length(hit.intersect_ - light.point_);  //distance zwischen light und intersect punkt
+    //int distance = glm::length(hit.intersect_ - light->point_);  //distance zwischen light und intersect punkt
 
     Hit lightHit = scene_.composite_ -> intersect(ray_to_light);
 
      if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
     {
-      //diffuselight(color, hit, light, ray_to_light);
-      //specularlight(color, hit, light, ray_to_light, ray);
+      diffuselight(color, hit, light, ray_to_light);
+      specularlight(color, hit, light, ray_to_light, ray);
       //falls kein hit: berechne diffus und specular light
     } 
       std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
@@ -140,3 +170,13 @@ void Renderer::write(Pixel const& p)
         float cosb = std::max(0.0f, glm::dot(r, glm::normalize(ray.direction)));          //evtl hier nochmal mit transf. ray probieren!
         clr+= light->color_ * Hitze.shape_->get_material().ks_ * pow(cosb, Hitze.shape_->get_material().m_);
       }
+
+
+  Color Renderer::ToneMapping(Color & clr)
+  {
+    Color color;
+    color.r = clr.r/(clr.r+1);
+    color.g = clr.g/(clr.g+1);
+    color.b = clr.b/(clr.b+1);
+    return color;
+  }

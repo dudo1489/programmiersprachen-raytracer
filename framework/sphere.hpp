@@ -8,6 +8,7 @@
 #include "ray.hpp"
 
 
+
 class Sphere: public Shape
 {
     glm::vec3 center_;
@@ -29,6 +30,8 @@ public:
 
    // bool intersect(Ray const& ray, float& distance) override;
     Hit intersect(Ray const& ray) override;
+    glm::vec3 calculate_normale(Hit const& hit) const override;
+
 
 };
 

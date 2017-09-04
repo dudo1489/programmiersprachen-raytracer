@@ -55,18 +55,23 @@ std::ostream& Composite::print(std::ostream& os) const
 
 Hit Composite::intersect(Ray const& ray)
 {
-    Hit hit_far;
+    Hit hit_temp;
     Hit hit_close;
 
-    for (auto const& shape : shape_)
+    for (auto const& i : shape_)
     {
-        hit_far = shape -> intersect(ray);
-        if(hit_far.distance_ < hit_close.distance_)
+        hit_temp = i -> intersect(ray);
+        if(hit_temp.distance_ < hit_close.distance_)
         {
-            hit_close = hit_far;
+            hit_close = hit_temp;
         }
-    
-    return hit_close;
     }
+    return hit_close;
+    
 }
+
+glm::vec3 Composite::calculate_normale(Hit const& hit) const
+{}
+
+
   

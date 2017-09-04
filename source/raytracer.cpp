@@ -17,8 +17,8 @@
 int main(int argc, char* argv[])
 {
   std::string input_path;
-  unsigned  const width = 800;
-  unsigned const height = 600;
+  unsigned  const width = 401;
+  unsigned const height = 401;
   std::cout << "Please enter the path to your file:" << std::endl;
   std::cin >> input_path;
 

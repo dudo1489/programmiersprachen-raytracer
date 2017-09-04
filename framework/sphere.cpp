@@ -52,27 +52,33 @@ std::ostream& Sphere::print(std::ostream& os) const
     <<"Radius: "<<radius_<<"\n";
     return os;
 }
-/*
-bool Sphere::intersect(Ray const& ray, float& distance)
-{
-    
-   auto norm_direction = glm::normalize(ray.direction);
-    auto result = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
-    return result;
-    
-}
-*/
-
 
 Hit Sphere::intersect(Ray const& ray)
 {
-    float distance = 0.0f;
-    Hit sphere_hit;
-    sphere_hit.shape_ = this;
+    float distance = INFINITY;
+  // Hit intersect_hit;
+ //   intersect_hit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
+  //  std::cout << "ray.origin: " << ray.origin.x<<"     " <<ray.origin.y<<"    "<< ray.origin.z <<"    "<< "\n";
+   //  std::cout << "ray.direction: " << ray.direction.x<<"     "<< ray.direction.y<<"     "<< ray.direction.z <<"\n";
 
-   auto norm_direction = glm::normalize(ray.direction);
-    sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_ * radius_, distance);
-   
-    return sphere_hit;
+    bool hit = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_*radius_, distance);
     
+    if (hit == true)
+    {  
+      glm::vec3 intersection_point = ray.origin + distance * ray.direction;
+      std::cout<< "surfacepoints" << intersection_point.x <<"   "<<intersection_point.y<<"   "<<intersection_point.z<<"\n";
+      
+      glm::vec3 normalen_vec = glm::normalize(intersection_point - center_);
+      std::cout<< "normalen_vec" << normalen_vec.x <<"   "<<normalen_vec.y<<"   "<<normalen_vec.z<<"\n";
+
+      std::cout<< "distance vom hit "<<distance << "\n";
+
+      return Hit{true, distance, intersection_point, normalen_vec, this};
+    }
+
+    return Hit{};
 }
+
+glm::vec3 Sphere::calculate_normale(Hit const& hit)const
+{}
+    

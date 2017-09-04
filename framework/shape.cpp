@@ -41,6 +41,16 @@ String const& Shape::get_name() const
     return name_;
 }
 
+glm::mat4 Shape::get_transform_() const
+{
+    return transform_;
+}
+
+glm::mat4 Shape::get_transform_inv_() const
+{
+    return transform_inv_;
+}
+
 std::ostream& Shape::print(std::ostream& os) const
 {
     os<<"Name: "<<name_<<"\n"<<"Material: "<<material_<<"\n";

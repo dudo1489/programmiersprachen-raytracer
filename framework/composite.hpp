@@ -5,7 +5,8 @@
 #include <memory>
 #include "shape.hpp"
 #include <map>
-#include <ostream>
+
+//#include <ostream>
 
 
 class Composite : public Shape
@@ -14,21 +15,25 @@ class Composite : public Shape
     
     Composite();
     Composite(std::string const& name);
-     ~Composite(); 
+    ~Composite(); 
 
     void add_shape(std::shared_ptr<Shape> const& shape);
     void set_name(std::string const name); 
 
-    float area() const;
-    float volume() const;    
+    float area() const override;
+    float volume() const override;    
 
     std::ostream& print(std::ostream& os) const override;    //mussten implementiert werden da Composite sonst virtuell
-    Hit intersect(Ray const& ray);
+    Hit intersect(Ray const& ray)override;
+    glm::vec3 calculate_normale(Hit const& hit) const override;
+
+
 
     private:
-    std::vector<std::shared_ptr<Shape>> shape_;
-    std::string name_;
-    
+
+        std::string name_;
+        std::vector<std::shared_ptr<Shape>> shape_;
+
 };
 
 #endif 

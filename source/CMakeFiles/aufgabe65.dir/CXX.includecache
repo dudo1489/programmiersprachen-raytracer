@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/aufgabe65.cpp
+iostream
+-
+fstream
+-
+map
+-
+material.hpp
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/material.hpp
+color.hpp
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/color.hpp
+sstream
+-
+string
+-
+
+framework/color.hpp
+iostream
+-
+
+framework/material.hpp
+iostream
+-
+color.hpp
+framework/color.hpp
+

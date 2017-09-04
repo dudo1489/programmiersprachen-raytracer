@@ -54,121 +54,82 @@ std::ostream& Box::print(std::ostream& os) const
     <<"Max: ("<<max_.x<<", "<<max_.y<<", "<<max_.z<<")";
     return os;
 }
-/*
-//bool intersect läuft
-bool Box::intersect(Ray const& ray ,float& t)
+
+Hit Box::intersect(Ray const& rayman)
 {
-    Box boxhit;
-    float tfar;
-    float tnear;
 
-    float tfarx;
-    float tnearx;
-    float tfary;
-    float tneary;
-    float tfarz;
-    float tnearz;
+  Hit hitt{this};
+
+//-------------
+  Ray ray;
+  ray.direction = glm::normalize(rayman.direction);
+  ray.origin = rayman.origin;
+//-------------
+
+ // Ray ray = transformRay(get_transform_inv_(), rayman);
+  float tmin = -INFINITY, tmax = INFINITY;
+
+  float t1 = (min_.x - ray.origin.x)/ray.direction.x;
+  float t2 = (max_.x - ray.origin.x)/ray.direction.x;
+  tmin = std::max(tmin,std::min(t1,t2));
+  tmax = std::min(tmax,std::max(t1,t2));
+
+  t1 = (min_.y - ray.origin.y)/ray.direction.y;
+  t2 = (max_.y - ray.origin.y)/ray.direction.y;
+  tmin = std::max(tmin,std::min(t1,t2));
+  tmax = std::min(tmax,std::max(t1,t2));
+
+  t1 = (min_.z - ray.origin.z)/ray.direction.z;
+  t2 = (max_.z - ray.origin.z)/ray.direction.z;
+  tmin = std::max(tmin,std::min(t1,t2));
+  tmax = std::min(tmax,std::max(t1,t2));
+
+  if (tmax > std::max(0.0f, tmin))
+  {
+    hitt.distance_ = sqrt(tmin*tmin*(
+                      ray.direction.x*ray.direction.x +
+                      ray.direction.y*ray.direction.y +
+                      ray.direction.z*ray.direction.z ));
+    
+  //  hit.surface_pt = this->calc_surface_pt(ray, hit.distance);
+
+    hitt.intersect_ = ray.origin + hitt.distance_ * ray.direction;
 
 
-    float tx1 = (min_.x-ray.origin.x)/ray.direction.x;
-    float tx2 = (max_.x-ray.origin.x)/ray.direction.x;
- 
-    tfarx=std::max(tx1, tx2);
-    tnearx=std::min(tx1, tx2);
-
-    float ty1 = (min_.y-ray.origin.y)/ray.direction.y;
-    float ty2 = (max_.y-ray.origin.y)/ray.direction.y;
-  
-    tfary=std::max(ty1, ty2);
-    tneary=std::min(ty1, ty2);
-
-    float tz1 = (min_.z-ray.origin.z)/ray.direction.z;
-    float tz2 = (max_.z-ray.origin.z)/ray.direction.z;
-
-    tfarz=std::max(tz1, tz2);
-    tnearz=std::min(tz1, tz2);
-
-    tfar=std::max(tfarx, tfary);
-    tnear=std::min(tnearx, tneary);
-
-   if(tfar<tnear)
-   {
-        return false;
-   }
- 
-   tfar=std::min(tfar, tfarz);
-   tnear=std::max(tnear, tnearz);
-
-   if((tfar<0) || (tfar<tnear))
-   {
-       return false;
-   }
-
-   return true;
+    hitt.hit_ = true;  
+    hitt.normal_ = this->calculate_normale(hitt);
+    hitt.intersect_ = glm::vec3(get_transform_()*glm::vec4(hitt.intersect_,1.0));
+    hitt.normal_ = glm::normalize(glm::vec3(glm::transpose(get_transform_inv_())*glm::vec4(hitt.normal_, 0.0)));
+  }
+  return hitt;
 }
 
-*/
-
-Hit Box::intersect(Ray const& ray)
-{   
-    Hit box_hit;
-
-    box_hit.shape_ = this;
-
-    float tfar;
-    float tnear;
-
-    float tfarx;
-    float tnearx;
-    float tfary;
-    float tneary;
-    float tfarz;
-    float tnearz;
-
-
-    float tx1 = (min_.x-ray.origin.x)/ray.direction.x;
-    float tx2 = (max_.x-ray.origin.x)/ray.direction.x;
- 
-    tfarx=std::max(tx1, tx2);
-    tnearx=std::min(tx1, tx2);
-
-    float ty1 = (min_.y-ray.origin.y)/ray.direction.y;
-    float ty2 = (max_.y-ray.origin.y)/ray.direction.y;
-  
-    tfary=std::max(ty1, ty2);
-    tneary=std::min(ty1, ty2);
-
-    float tz1 = (min_.z-ray.origin.z)/ray.direction.z;
-    float tz2 = (max_.z-ray.origin.z)/ray.direction.z;
-
-    tfarz=std::max(tz1, tz2);
-    tnearz=std::min(tz1, tz2);
-
-    tfar=std::max(tfarx, tfary);
-    tnear=std::min(tnearx, tneary);
-
-    box_hit.distance_ = sqrt(ray.direction.x*ray.direction.x+ray.direction.y*ray.direction.y+ray.direction.z*ray.direction.z); //Normierung des 
-
-    box_hit.intersect_ = glm::vec3{tnear*ray.direction.x, tnear*ray.direction.y, tnear*ray.direction.z}+ray.origin;
-
-   if(tfar<tnear)
-   {
-    box_hit.hit_ = false;
-    return box_hit;
-
-   }
- 
-   tfar=std::min(tfar, tfarz);
-   tnear=std::max(tnear, tnearz);
-
-   if((tfar<0) || (tfar<tnear))
-   {
-        box_hit.hit_ = false;
-        return box_hit;
-
-   }
-
-   box_hit.hit_ = true;
-   
-   return box_hit;
+glm::vec3 Box::calculate_normale(Hit const& hit) const
+{
+  auto surface_pt = hit.intersect_; 
+  if(surface_pt.x == Approx(min_.x))
+  {
+    return glm::vec3{-1.0,0.0,0.0};
+  }
+  if(surface_pt.y == Approx(min_.y))
+  {
+    return glm::vec3{0.0,-1.0,0.0};
+  }
+  if(surface_pt.z == Approx(min_.z))
+  {
+    return glm::vec3{0.0,0.0,-1.0};
+  }
+  if(surface_pt.x == Approx(max_.x))
+  {
+    return glm::vec3{1.0,0.0,0.0};
+  }
+  if(surface_pt.y == Approx(max_.y))
+  {
+    return glm::vec3{0.0,1.0,0.0};
+  }
+  if(surface_pt.z == Approx(max_.z))
+  {
+    return glm::vec3{0.0,0.0,1.0};
+  }
 }
+
