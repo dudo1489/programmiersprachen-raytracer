@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
   Renderer app= Renderer{width, height, filename, sceneToRender};
  
 
-  std::thread thr([&app]() { app.render(); });
+ std::thread thr([&app]() { app.render(); });
 
   Window win{glm::ivec2{width,height}};
 
