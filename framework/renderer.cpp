@@ -146,8 +146,8 @@ void Renderer::write(Pixel const& p)
 
      if(lightHit.hit_ == false)  //gibt es hit zwischen light und intersect 
     {
-      //diffuselight(color, hit, light, ray_to_light);
-      //specularlight(color, hit, light, ray_to_light, ray);
+      diffuselight(color, hit, light, ray_to_light);
+      specularlight(color, hit, light, ray_to_light, ray);
       //falls kein hit: berechne diffus und specular light
     } 
       std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
