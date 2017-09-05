@@ -51,11 +51,11 @@ void Renderer::render()
   //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
   //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
       Ray temp_ray = scene_.camera_.generate_ray(x, y, height_, width_);
-      Color tempcolor;
+    
       //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
-      tempcolor = raytrace(temp_ray);
+      p.color = raytrace(temp_ray, 3);
 
-      p.color = ToneMapping(tempcolor);
+      p.color = ToneMapping(p.color);
 
   /*    if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
           p.color = Color(0.0, 1.0, float(x)/height_);
@@ -87,7 +87,7 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
-  Color Renderer::raytrace(Ray const& ray)
+  Color Renderer::raytrace(Ray const& ray, unsigned int depth)
   {
 
     Hit hit = scene_.composite_ -> intersect(ray);  //alle shapes intersecten und am nahe gelegenste shape zurückgeben
@@ -110,6 +110,11 @@ void Renderer::write(Pixel const& p)
             pointlight(color, light, hit, ray); //errechne licht an objekt
           
         }
+
+    if(depth>0)
+    {
+      spiegelung(color, hit, ray, depth);
+    }
      
       std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       
@@ -152,6 +157,8 @@ void Renderer::write(Pixel const& p)
       specularlight(color, hit, light, ray_to_light, ray);
       //falls kein hit: berechne diffus und specular light
     } 
+
+    
       std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       //falls objekt dazwischen ist wirft es hier schatten
   }
@@ -170,6 +177,19 @@ void Renderer::write(Pixel const& p)
         float cosb = std::max(0.0f, glm::dot(r, glm::normalize(ray.direction)));          //evtl hier nochmal mit transf. ray probieren!
         clr+= light->color_ * Hitze.shape_->get_material().ks_ * pow(cosb, Hitze.shape_->get_material().m_);
       }
+
+  void Renderer::spiegelung(Color & clr, Hit const& Hitze, Ray const& ray, unsigned int depth)
+  {
+    auto direction = glm::normalize(glm::reflect(ray.direction, Hitze.normal_));
+    Ray ray_to_Object{Hitze.intersect_+ (direction*0.01f), direction};
+
+    Color next_Object_clr = raytrace(ray_to_Object, depth-1);
+    
+    clr = clr * next_Object_clr * Hitze.shape_->get_material().ks_;
+
+    //clr = clr *(1.0f - Hitze.shape_->get_material().ks_) + next_Object_clr * (Hitze.shape_->get_material().ks_);
+
+  }
 
 
   Color Renderer::ToneMapping(Color & clr)

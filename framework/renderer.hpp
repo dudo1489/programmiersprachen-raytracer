@@ -25,12 +25,13 @@ public:
 
   void render();
   void write(Pixel const& p);
-  Color raytrace(Ray const& ray);
+  Color raytrace(Ray const& ray, unsigned int depth);
   void ambientlight(Color & color, Color const& ka);
   void specularlight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight, Ray const& ray);
   void diffuselight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight);
   Color ToneMapping(Color & clr);
   void pointlight(Color & color, std::shared_ptr<Light> const& light,Hit const& hit, Ray const& ray);
+  void spiegelung(Color & clr, Hit const& Hitze, Ray const& ray, unsigned int depth);
   inline std::vector<Color> const& colorbuffer() const
   {
     return colorbuffer_;
