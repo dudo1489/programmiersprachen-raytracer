@@ -27,11 +27,12 @@
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/framework/CMakeFiles/framework.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/install/local.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/rebuild_cache.dir
-/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/tests.dir
-/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/edit_cache.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/install/strip.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/install.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/aufgabe65.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/list_install_components.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/raytracer.dir
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/raymovie.dir
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/edit_cache.dir
+/Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/tests.dir
 /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer/source/CMakeFiles/example.dir

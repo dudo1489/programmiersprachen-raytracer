@@ -78,17 +78,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.7.2_1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -121,6 +110,17 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.7.2_1/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -155,21 +155,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-source/CMakeFiles/tests.dir/rule:
-	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/tests.dir/rule
-.PHONY : source/CMakeFiles/tests.dir/rule
-
-# Convenience name for target.
-tests: source/CMakeFiles/tests.dir/rule
-
-.PHONY : tests
-
-# fast build rule for target.
-tests/fast:
-	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/tests.dir/build.make source/CMakeFiles/tests.dir/build
-.PHONY : tests/fast
-
-# Convenience name for target.
 source/CMakeFiles/aufgabe65.dir/rule:
 	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/aufgabe65.dir/rule
 .PHONY : source/CMakeFiles/aufgabe65.dir/rule
@@ -198,6 +183,36 @@ raytracer: source/CMakeFiles/raytracer.dir/rule
 raytracer/fast:
 	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/build
 .PHONY : raytracer/fast
+
+# Convenience name for target.
+source/CMakeFiles/raymovie.dir/rule:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/raymovie.dir/rule
+.PHONY : source/CMakeFiles/raymovie.dir/rule
+
+# Convenience name for target.
+raymovie: source/CMakeFiles/raymovie.dir/rule
+
+.PHONY : raymovie
+
+# fast build rule for target.
+raymovie/fast:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/raymovie.dir/build.make source/CMakeFiles/raymovie.dir/build
+.PHONY : raymovie/fast
+
+# Convenience name for target.
+source/CMakeFiles/tests.dir/rule:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f CMakeFiles/Makefile2 source/CMakeFiles/tests.dir/rule
+.PHONY : source/CMakeFiles/tests.dir/rule
+
+# Convenience name for target.
+tests: source/CMakeFiles/tests.dir/rule
+
+.PHONY : tests
+
+# fast build rule for target.
+tests/fast:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/tests.dir/build.make source/CMakeFiles/tests.dir/build
+.PHONY : tests/fast
 
 # Convenience name for target.
 source/CMakeFiles/example.dir/rule:
@@ -268,6 +283,33 @@ example.cpp.s:
 	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/example.dir/build.make source/CMakeFiles/example.dir/example.cpp.s
 .PHONY : example.cpp.s
 
+raymovie.o: raymovie.cpp.o
+
+.PHONY : raymovie.o
+
+# target to build an object file
+raymovie.cpp.o:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/raymovie.dir/build.make source/CMakeFiles/raymovie.dir/raymovie.cpp.o
+.PHONY : raymovie.cpp.o
+
+raymovie.i: raymovie.cpp.i
+
+.PHONY : raymovie.i
+
+# target to preprocess a source file
+raymovie.cpp.i:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/raymovie.dir/build.make source/CMakeFiles/raymovie.dir/raymovie.cpp.i
+.PHONY : raymovie.cpp.i
+
+raymovie.s: raymovie.cpp.s
+
+.PHONY : raymovie.s
+
+# target to generate assembly for a file
+raymovie.cpp.s:
+	cd /Users/Blueshift/Desktop/Programmiersprachen/programmiersprachen-raytracer && $(MAKE) -f source/CMakeFiles/raymovie.dir/build.make source/CMakeFiles/raymovie.dir/raymovie.cpp.s
+.PHONY : raymovie.cpp.s
+
 raytracer.o: raytracer.cpp.o
 
 .PHONY : raytracer.o
@@ -330,13 +372,14 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... rebuild_cache"
-	@echo "... tests"
-	@echo "... edit_cache"
 	@echo "... install/strip"
 	@echo "... install"
 	@echo "... aufgabe65"
 	@echo "... list_install_components"
 	@echo "... raytracer"
+	@echo "... raymovie"
+	@echo "... edit_cache"
+	@echo "... tests"
 	@echo "... example"
 	@echo "... aufgabe65.o"
 	@echo "... aufgabe65.i"
@@ -344,6 +387,9 @@ help:
 	@echo "... example.o"
 	@echo "... example.i"
 	@echo "... example.s"
+	@echo "... raymovie.o"
+	@echo "... raymovie.i"
+	@echo "... raymovie.s"
 	@echo "... raytracer.o"
 	@echo "... raytracer.i"
 	@echo "... raytracer.s"

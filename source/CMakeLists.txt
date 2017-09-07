@@ -18,6 +18,7 @@ install(TARGETS raytracer DESTINATION .)
 #BuildAufgabe65
 #add_executable(aufgabe aufgabe65.cpp)
 
+
  #Build tests
 add_executable(tests
   tests.cpp)
@@ -32,3 +33,14 @@ target_link_libraries(aufgabe65 ${FRAMEWORK_NAME} ${LIBRARIES}
   ${GLFW_LIBRARIES}
   )
 
+#Build RayMoViE
+add_executable(raymovie raymovie.cpp)
+
+target_link_libraries(raymovie ${FRAMEWORK_NAME} ${LIBRARIES}
+  glfw
+  ${GLFW_LIBRARIES}
+  )
+add_dependencies(raymovie glfw ${FRAMEWORK_NAME} ${COPY_BINARY})
+
+#Build SDFMAKER
+#add_executable(sdfmaker sdfmaker.cpp)

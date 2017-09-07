@@ -66,12 +66,12 @@ Hit Sphere::intersect(Ray const& ray)
     if (hit == true)
     {  
       glm::vec3 intersection_point = ray.origin + distance * ray.direction;
-      std::cout<< "surfacepoints" << intersection_point.x <<"   "<<intersection_point.y<<"   "<<intersection_point.z<<"\n";
+   //   std::cout<< "surfacepoints" << intersection_point.x <<"   "<<intersection_point.y<<"   "<<intersection_point.z<<"\n";
       
       glm::vec3 normalen_vec = glm::normalize(intersection_point - center_);
-      std::cout<< "normalen_vec" << normalen_vec.x <<"   "<<normalen_vec.y<<"   "<<normalen_vec.z<<"\n";
+   //   std::cout<< "normalen_vec" << normalen_vec.x <<"   "<<normalen_vec.y<<"   "<<normalen_vec.z<<"\n";
 
-      std::cout<< "distance vom hit "<<distance << "\n";
+   //   std::cout<< "distance vom hit "<<distance << "\n";
 
       return Hit{true, distance, intersection_point, normalen_vec, this};
     }

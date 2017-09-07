@@ -14,7 +14,7 @@ Scene load(std::string const& file_to_read)
     std::string line;
     Scene loadedScene;
     std::map<std::string, std::shared_ptr<Shape>> shape_ptr;
-    
+
     file.open(file_to_read);    //open file
 
     if(!file.is_open())
@@ -194,6 +194,25 @@ Scene load(std::string const& file_to_read)
                     } 
 
             }
+            if(keyword == "render")
+            {
+                std::string chosen_cam;
+                std::string chosen_filename;
+                int chosen_width;
+                int chosen_height;
+
+                ss >> chosen_cam;
+                ss >> chosen_filename;
+                ss >> chosen_width;
+                ss >> chosen_height;
+
+                loadedScene.renderinfo_.camera_chosen = chosen_cam;
+                loadedScene.renderinfo_.image_name = chosen_filename;
+                loadedScene.renderinfo_.image_width = chosen_width;
+                loadedScene.renderinfo_.image_height = chosen_height;
+
+                std::cout << "added rendererinfo \n";
+            }
         }
     }
 
@@ -202,63 +221,7 @@ Scene load(std::string const& file_to_read)
 }
 
 
-/* int main()
-{
-	
-	std::ifstream Colorsource;
-	Colorsource.open("farben_zum_einlesen.txt", std::ios_base::in);
 
-	if(!Colorsource)
-	std::cerr << "didn´t found <farben_zum_einlesen.txt>\n";
-	else{
-		std::ofstream Materialliste("materiallist.cpp");
-		if (!Materialliste)
-			std::cerr  << "can not open <materiallist.cpp>\n";
-		else{
-			std::string line_to_read;
-
-			while (std::getline (Colorsource, line_to_read))
-			{ 
-				
-				Material new_material;
-				std::map<std::string, Material> materials;
-
-				std::stringstream ss;
-				std::string not_used;
-
-
-				ss << line_to_read;
-
-				ss >> not_used;
-				if (not_used == "define")
-				{ 
-					ss >> not_used;
-					if(not_used == "material")
-					{
-					    	ss >> new_material.name_;
-						ss >> new_material.ka_.r;
-						  ss >> new_material.ka_.g;
-						ss >> new_material.ka_.b;
-						ss >> new_material.kd_.r;
-						ss >> new_material.kd_.g;
-						ss >> new_material.kd_.b;
-						ss >> new_material.ks_.r;
-						ss >> new_material.ks_.g;  
-						ss >> new_material.ks_.b;    
-						ss >> new_material.m_;
-						materials[new_material.name_] = new_material;
-						std::cout << new_material << std::endl;
-					}
-				}
-			}
-			
-		}
-
-	}
- 	
-	return 0;
-}
-  */
 
 
 //  Material testmat(std::string {"testmaterial"}, Color{0.5f,1.0f,0.5f}, Color{0.8f,0.8f,0.4f}, Color{0.8f,0.9f,0.6f}, 0.6f);

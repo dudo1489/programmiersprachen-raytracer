@@ -75,8 +75,9 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/nanovg.dir/DependInfo.cmake"
   "external/glfw-3.2.1/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "framework/CMakeFiles/framework.dir/DependInfo.cmake"
-  "source/CMakeFiles/tests.dir/DependInfo.cmake"
   "source/CMakeFiles/aufgabe65.dir/DependInfo.cmake"
   "source/CMakeFiles/raytracer.dir/DependInfo.cmake"
+  "source/CMakeFiles/raymovie.dir/DependInfo.cmake"
+  "source/CMakeFiles/tests.dir/DependInfo.cmake"
   "source/CMakeFiles/example.dir/DependInfo.cmake"
   )

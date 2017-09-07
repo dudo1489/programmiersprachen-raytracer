@@ -10,6 +10,7 @@
 #include "composite.hpp"
 #include "camera.hpp"
 #include "shape.hpp"
+#include "renderinfo.hpp"
 
 #include <sstream>
 #include <vector>

@@ -12,17 +12,20 @@
 #include "ray.hpp"
 #include "composite.hpp"
 
-
-
-int main(int argc, char* argv[])
+//int argc, char* argv[]
+string concat(const string &s, int number)
 {
-  std::string input_path;
+    ostringstream result;
+    result << number<< s;
+    return result.str();
+}
+void raytrace(int number, std::string path)
+{
   unsigned int width = 401;
   unsigned int height = 401;
-  std::cout << "Please enter the path to your file:" << std::endl;
-  std::cin >> input_path;
+  path = concat(path, number);
 
-  Scene sceneToRender = load(input_path); //lade scene 
+  Scene sceneToRender = load(path); //lade scene 
 
   //std::string const filename = "./raytrace.ppm";
   std::string const filename = sceneToRender.renderinfo_.image_name;
@@ -38,8 +41,8 @@ int main(int argc, char* argv[])
  
 
  std::thread thr([&app]() { app.render(); });
-
-  Window win{glm::ivec2{width,height}};
+  unsigned int  a = 100;
+/*  Window win{glm::ivec2{a,a}};
 
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -47,8 +50,23 @@ int main(int argc, char* argv[])
     }
     win.show(app.colorbuffer());
   }
-
+*/
   thr.join();
 
-  return 0;
+  return;
+}
+
+
+
+int main()
+{
+    std::string input_path;
+    std::cout << "Please enter the path to your file:" << std::endl;
+    std::cin >> input_path;
+  for (int y=0;y<30;++y)
+  {
+  raytrace(y, input_path);
+  }
+
+  return 0; 
 }

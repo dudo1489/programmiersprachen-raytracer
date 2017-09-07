@@ -8,7 +8,10 @@
 // -----------------------------------------------------------------------------
 
 #include "renderer.hpp"
-
+/*#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
+*/
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
   , height_(h)
@@ -35,6 +38,12 @@ void Renderer::render()
   float distance = 400;
 
   float pos_y = (((float)height_) / -2);
+/*
+  for(int i = 0; i < count; ++i)
+{
+  
+}*/
+//#pragma omp parallel for 
 
   for (unsigned y = 0; y < height_; ++y) 
   {
@@ -46,7 +55,7 @@ void Renderer::render()
     {
       ++pos_x;
       Pixel p(x,y);
-      std::cout<<"\n"<<"Pixel "<<x<<", "<<y<<"\n";
+  //    std::cout<<"\n"<<"Pixel "<<x<<", "<<y<<"\n";
 
   //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
   //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
@@ -55,7 +64,7 @@ void Renderer::render()
       //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
       p.color = raytrace(temp_ray, 3);
 
-      p.color = ToneMapping(p.color);
+//      p.color = ToneMapping(p.color);
 
   /*    if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
           p.color = Color(0.0, 1.0, float(x)/height_);
@@ -100,7 +109,7 @@ void Renderer::write(Pixel const& p)
 
       ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
 
-      std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+      //std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
 
      
 
@@ -116,7 +125,7 @@ void Renderer::write(Pixel const& p)
       spiegelung(color, hit, ray, depth);
     }
      
-      std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+      //std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       
     
       return color;
@@ -124,7 +133,7 @@ void Renderer::write(Pixel const& p)
     
     else
     {
-        std::cout << "no hit color:" <<scene_.backgroundclr_.r << ","<<scene_.backgroundclr_.g <<"," << scene_.backgroundclr_.b <<"\n";
+       // std::cout << "no hit color:" <<scene_.backgroundclr_.r << ","<<scene_.backgroundclr_.g <<"," << scene_.backgroundclr_.b <<"\n";
         
         return scene_.backgroundclr_;}
     }
@@ -133,7 +142,7 @@ void Renderer::write(Pixel const& p)
   void Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
   {
     color+=(scene_.backgroundclr_)*(ka);
-    std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+  //  std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
    /* std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","
                                   <<scene_.light_[0]->brightness_<< 
                                   ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";

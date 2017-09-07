@@ -13,6 +13,7 @@
 #include "light.hpp"
 #include "composite.hpp"
 #include "camera.hpp"
+#include "renderinfo.hpp"
 
 
 
@@ -25,6 +26,8 @@ struct Scene
     Camera camera_;
     Color backgroundclr_{0.5,0.5,0.5};
     std::vector<std::shared_ptr<Light>> light_;
+    Renderinfo renderinfo_;
+
 };
 
 #endif 

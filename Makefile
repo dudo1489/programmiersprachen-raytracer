@@ -194,19 +194,6 @@ framework/fast:
 .PHONY : framework/fast
 
 #=============================================================================
-# Target rules for targets named tests
-
-# Build rule for target.
-tests: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tests
-.PHONY : tests
-
-# fast build rule for target.
-tests/fast:
-	$(MAKE) -f source/CMakeFiles/tests.dir/build.make source/CMakeFiles/tests.dir/build
-.PHONY : tests/fast
-
-#=============================================================================
 # Target rules for targets named aufgabe65
 
 # Build rule for target.
@@ -231,6 +218,32 @@ raytracer: cmake_check_build_system
 raytracer/fast:
 	$(MAKE) -f source/CMakeFiles/raytracer.dir/build.make source/CMakeFiles/raytracer.dir/build
 .PHONY : raytracer/fast
+
+#=============================================================================
+# Target rules for targets named raymovie
+
+# Build rule for target.
+raymovie: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 raymovie
+.PHONY : raymovie
+
+# fast build rule for target.
+raymovie/fast:
+	$(MAKE) -f source/CMakeFiles/raymovie.dir/build.make source/CMakeFiles/raymovie.dir/build
+.PHONY : raymovie/fast
+
+#=============================================================================
+# Target rules for targets named tests
+
+# Build rule for target.
+tests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tests
+.PHONY : tests
+
+# fast build rule for target.
+tests/fast:
+	$(MAKE) -f source/CMakeFiles/tests.dir/build.make source/CMakeFiles/tests.dir/build
+.PHONY : tests/fast
 
 #=============================================================================
 # Target rules for targets named example
@@ -287,9 +300,10 @@ help:
 	@echo "... nanovg"
 	@echo "... glfw"
 	@echo "... framework"
-	@echo "... tests"
 	@echo "... aufgabe65"
 	@echo "... raytracer"
+	@echo "... raymovie"
+	@echo "... tests"
 	@echo "... example"
 	@echo "... external/nanovg/src/nanovg.o"
 	@echo "... external/nanovg/src/nanovg.i"
