@@ -23,7 +23,7 @@ struct Scene
     
     std::map<std::string, Material> materials_;
     std::shared_ptr<Composite> composite_;
-    Camera camera_;
+    std::map<std::string, Camera> camera_;
     Color backgroundclr_{0.5,0.5,0.5};
     std::vector<std::shared_ptr<Light>> light_;
     Renderinfo renderinfo_;

@@ -59,7 +59,8 @@ void Renderer::render()
 
   //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
   //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
-      Ray temp_ray = scene_.camera_.generate_ray(x, y, height_, width_);
+    
+      Ray temp_ray = scene_.camera_.find(scene_.renderinfo_.camera_chosen)->second.generate_ray(x, y, height_, width_);
     
       //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
       p.color = raytrace(temp_ray, 3);

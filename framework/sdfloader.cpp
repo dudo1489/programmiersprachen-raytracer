@@ -188,8 +188,9 @@ Scene load(std::string const& file_to_read)
 
 
                         Camera sdf_camera{cameraName, fov_x, camera_position, camera_direction, camera_up};    
-                        
-                        loadedScene.camera_= sdf_camera;
+
+                        loadedScene.camera_[sdf_camera.name_]=sdf_camera;    //CAMERA in scene ueberschreiben
+//                        loadedScene.camera_= sdf_camera;
                         std::cout << "added camera \n";
                     } 
 
