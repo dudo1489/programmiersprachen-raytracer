@@ -63,7 +63,7 @@ void Renderer::render()
       Ray temp_ray = scene_.camera_.find(scene_.renderinfo_.camera_chosen)->second.generate_ray(x, y, height_, width_);
     
       //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
-      p.color = raytrace(temp_ray, 3);
+      p.color = raytrace(temp_ray, 0);
 
 //      p.color = ToneMapping(p.color);
 
@@ -106,7 +106,7 @@ void Renderer::write(Pixel const& p)
     if(hit.hit_ == true)  //falls es hit gibt mache:
     { 
 
-      Color color = hit.shape_->get_material().ka_;
+      Color color;
 
       ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
 
@@ -169,7 +169,7 @@ void Renderer::write(Pixel const& p)
     } 
 
     
-      std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
+     // std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       //falls objekt dazwischen ist wirft es hier schatten
   }
 
@@ -184,6 +184,7 @@ void Renderer::write(Pixel const& p)
   void Renderer::specularlight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight, Ray const& ray)
       {
         auto r = glm::normalize(glm::reflect(raylight.direction, Hitze.normal_));
+
         float cosb = std::max(0.0f, glm::dot(r, glm::normalize(ray.direction)));          //evtl hier nochmal mit transf. ray probieren!
         clr+= light->color_ * Hitze.shape_->get_material().ks_ * pow(cosb, Hitze.shape_->get_material().m_);
       }
