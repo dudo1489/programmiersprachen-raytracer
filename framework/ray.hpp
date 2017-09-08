@@ -21,6 +21,9 @@ struct Ray
 
     Ray& transformRay(glm::mat4 const& mat);
 
+    friend Ray transformRay(glm::mat4x4 const& transform_inv, Ray const& ray);
+    
+
     /*friend Ray transformRay(glm::mat4x4 const& trans_mat_inv, Ray const& Ray)
     {
         Ray newray;

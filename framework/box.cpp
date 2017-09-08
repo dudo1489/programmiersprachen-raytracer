@@ -65,7 +65,7 @@ Hit Box::intersect(Ray const& rayman)
   ray.direction = glm::normalize(rayman.direction);
   ray.origin = rayman.origin;
 //-------------
-
+  ray = transformRay(world_transform_inv_, rayman);
  // Ray ray = transformRay(get_transform_inv_(), rayman);
   float tmin = -INFINITY, tmax = INFINITY;
 

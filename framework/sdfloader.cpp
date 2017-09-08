@@ -32,6 +32,55 @@ Scene load(std::string const& file_to_read)
             ss >> keyword;  //ss springt zum ersten wort
 
 
+            if(keyword == "transform")
+            {
+                std::string shapename;
+                std::string transform;
+                float x, y, z;
+                
+                ss >> shapename;
+                
+                auto shape = shape_ptr.find(shapename);
+                std::cout<<"test \n";
+                if(shape != shape_ptr.end())
+                {
+                    ss >> transform;
+
+                    if(transform == "scale")
+                    {
+                        ss >> x;
+                        ss >> y;
+                        ss >> z;
+
+                        shape->second->scale(glm::vec3(x, y, z));
+                        std::cout<<"scale works \n";
+                    }
+
+                    else if(transform == "translate")
+                    {
+                        ss >> x;
+                        ss >> y;
+                        ss >> z;
+
+                        shape->second->transform(glm::vec3(x, y, z));
+                        std::cout<<"translate works \n";
+                    }
+
+                    else if(transform == "rotate")
+                    {
+                        float angle;
+
+                        ss >> angle;
+                        ss >> x;
+                        ss >> y;
+                        ss >> z;
+
+                        shape->second->rotate(angle, glm::vec3(x, y, z));
+                        std::cout<<"rotate works \n";
+                    }
+                }
+            }
+
             if(keyword == "define")
             {
                 ss >> keyword;
