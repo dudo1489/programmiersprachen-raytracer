@@ -63,7 +63,7 @@ int main()
     std::string input_path;
     std::cout << "Please enter the path to your file:" << std::endl;
     std::cin >> input_path;
-  for (int y=0;y<80;++y)
+  for (int y=78;y<130;++y)
   {
   std::cout << "begin raytrace for image "<<y<<std::endl;
   raytrace(y, input_path);

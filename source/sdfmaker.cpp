@@ -104,7 +104,7 @@ string concat(const string &s, int number)
 
 int main()
 {
-	float i=80;										//Anzahl der zu erstellenden SDF-Dateien
+	float i=130;										//Anzahl der zu erstellenden SDF-Dateien
 
 	string file_name = "ray";		
 	
