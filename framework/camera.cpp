@@ -29,16 +29,7 @@
         {std::cout<<"Camera "<< name_<<" erstellt. Mit fov_x = "<<fov_x_<<" and Position: "<<position_.x<<" , "<<position_.y<<" , "<<position_.z<<" and direction_: "<<direction_.x<<" , "<<direction_.y<<" , "<<direction_.z<<" and upVector_: "<<upVector_.x<<" , "<<upVector_.y<<" , "<<upVector_.z<<"\n";}
 
     Camera::~Camera() {}
-/*
-    Ray Camera::generate_ray(float x_position, float y_position, float distance) const
-    {
-
-        Ray position_ray{position_, glm::vec3{x_position, y_position, -(distance)}};
-
-        return position_ray;
-    }
-
-  */  
+      
     Ray Camera::generate_ray(int x,int y, int height, int width) const
     {
         glm::vec3 view

@@ -103,8 +103,7 @@ Scene load(std::string const& file_to_read)
 
                     loadedScene.materials_[material.name_]=material;    //material in scene ueberschreiben
                                                                         //wird nach keyword in die map materials_ eingeordnet
-                   // std::cout << "added material: " << material.name_ << "\n";
-                   // std::cout << "material: " << material.name_ << "\n";
+                   
                 }
 
 
@@ -136,7 +135,7 @@ Scene load(std::string const& file_to_read)
 
                         shape_ptr[boxName]=box;    //box in map fuer shape zeiger speichern nach keyword boxname
 
-                     //   std::cout << "added shape box: " << boxName << "\n";
+                    
                     }
 
                     if(keyword == "sphere")
@@ -160,7 +159,7 @@ Scene load(std::string const& file_to_read)
                         
                         shape_ptr[sphereName]=sphere;
 
-                       // std::cout << "added shape sphere: " << sphereName << "\n";
+                       
                     }
 
 
@@ -180,7 +179,6 @@ Scene load(std::string const& file_to_read)
                             if(shape_to_insert != shape_ptr.end())
                             {
                             loadedScene.composite_ -> add_shape(shape_to_insert -> second);
-                         //   std::cout << "added "<<shapeName<<" to Composite: " << compositeName << "\n"; 
                             
                             }
                         } 
@@ -207,7 +205,7 @@ Scene load(std::string const& file_to_read)
                         auto light = std::make_shared<Light>(lightName, point, color, brightness);
 
                         loadedScene.light_.push_back(light);
-                   //     std::cout << "added light \n";
+                   
                     }
     
                  if(keyword == "camera")
@@ -240,8 +238,8 @@ Scene load(std::string const& file_to_read)
                         Camera sdf_camera{cameraName, fov_x, camera_position, camera_direction, camera_up};    
 
                         loadedScene.camera_[sdf_camera.name_]=sdf_camera;    //CAMERA in scene ueberschreiben
-//                        loadedScene.camera_= sdf_camera;
-                     //   std::cout << "added camera \n";
+
+
                     } 
 
             }
@@ -255,7 +253,7 @@ Scene load(std::string const& file_to_read)
 
                 loadedScene.backgroundclr_ = ambient_color;
 
-              //  std::cout << "ambient color setted \n";
+              
 
             }
             if(keyword == "render")
@@ -275,7 +273,7 @@ Scene load(std::string const& file_to_read)
                 loadedScene.renderinfo_.image_width = chosen_width;
                 loadedScene.renderinfo_.image_height = chosen_height;
 
-                //std::cout << "added rendererinfo \n";
+                
             }
         }
     }

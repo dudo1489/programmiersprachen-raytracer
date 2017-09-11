@@ -36,13 +36,13 @@ protected:
     virtual ~Shape();
     Shape(String const& name);
     Shape(Material const& mat, String const& name);
-    //Shape(std::shared_ptr<Material> material, String const& name);
+    
 
     Material const& get_material() const;
     String const& get_name() const;
     glm::mat4 get_transform_() const;
     glm::mat4 get_transform_inv_() const;
-    //std::shared_ptr<Material> get_material();
+    
 
     void scale(glm::vec3 const& scale_vec);
     void transform(glm::vec3 const& transale_vec);
@@ -50,7 +50,7 @@ protected:
 
     virtual std::ostream& print(std::ostream& os) const;
 
- //virtual bool intersect(Ray const& ray ,float& t) = 0;
+ 
     virtual Hit intersect(Ray const& ray) = 0;
     virtual glm::vec3 calculate_normale(Hit const& hit) const = 0;
 

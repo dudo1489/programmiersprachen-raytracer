@@ -2,7 +2,7 @@
 #include <cmath>
 
 
-//Box::~Box(){}
+
 
 
 Box::Box():
@@ -91,7 +91,7 @@ Hit Box::intersect(Ray const& rayman)
                       ray.direction.y*ray.direction.y +
                       ray.direction.z*ray.direction.z ));
     
-  //  hit.surface_pt = this->calc_surface_pt(ray, hit.distance);
+  
 
     hitt.intersect_ = ray.origin + hitt.distance_ * ray.direction;
 

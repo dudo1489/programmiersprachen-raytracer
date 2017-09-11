@@ -8,10 +8,7 @@
 // -----------------------------------------------------------------------------
 
 #include "renderer.hpp"
-/*#include <omp.h>
-#include <stdio.h>
-#include <stdlib.h>
-*/
+
 Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   : width_(w)
   , height_(h)
@@ -31,19 +28,10 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file, Scene const&
 
 void Renderer::render()
 {
-  //const std::size_t checkersize = 20;
- // float distance = -(float(width_)/2)/tan(M_PI*scene_.camera_.fov_x_/(2*180));
- // std::cout << "Size of composite: " << scene_.composite_->shape_.size() <<"\n \n";
 
   float distance = 400;
 
   float pos_y = (((float)height_) / -2);
-/*
-  for(int i = 0; i < count; ++i)
-{
-  
-}*/
-//#pragma omp parallel for 
 
   for (unsigned y = 0; y < height_; ++y) 
   {
@@ -55,24 +43,16 @@ void Renderer::render()
     {
       ++pos_x;
       Pixel p(x,y);
-  //    std::cout<<"\n"<<"Pixel "<<x<<", "<<y<<"\n";
-
-  //   Ray temp_ray {{0,0,0}, glm::normalize(glm::vec3(pos_x, pos_y, distance))};
-  //   Ray temp_ray = scene_.camera_.generate_ray(pos_x, pos_y, distance);
+ 
+  
     
       Ray temp_ray = scene_.camera_.find(scene_.renderinfo_.camera_chosen)->second.generate_ray(x, y, height_, width_);
     
-      //Ray testray {{0,0,0}, glm::normalize(glm::vec3(x, y, distance))};
+      
       p.color = raytrace(temp_ray, 0);
+      //p.color = antialiase(temp_ray, 4, 0);
 
-//      p.color = ToneMapping(p.color);
-
-  /*    if ( ((x/checkersize)%3) != ((y/checkersize)%2)) {
-          p.color = Color(0.0, 1.0, float(x)/height_);
-          } else {
-          p.color = Color(1, 0.0, .0float(y)/width_);
-        }
-  */
+      //p.color = ToneMapping(p.color);
 
   //    p.color = Color(1.0, 0.0, 1.0);//berechnet aus 
       write(p);
@@ -110,44 +90,34 @@ void Renderer::write(Pixel const& p)
 
       ambientlight(color, hit.shape_ -> get_material().ka_);  //errechne hintergrundlicht der szene 
 
-      //std::cout << "hit1 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-
      
 
-    for(auto light : scene_.light_) //gehe über jede lichtquelle
+      for(auto light : scene_.light_) //gehe über jede lichtquelle
         {
           
             pointlight(color, light, hit, ray); //errechne licht an objekt
           
         }
 
-    if(depth>0)
-    {
-      spiegelung(color, hit, ray, depth);
-    }
-     
-      //std::cout << "hit2 color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-      
+      if(depth>0)
+      {
+        spiegelung(color, hit, ray, depth);
+      }
+
     
       return color;
     }
     
-    else
-    {
-       // std::cout << "no hit color:" <<scene_.backgroundclr_.r << ","<<scene_.backgroundclr_.g <<"," << scene_.backgroundclr_.b <<"\n";
-        
-        return scene_.backgroundclr_;}
+      else
+      {
+        return scene_.backgroundclr_;
+      }
     }
 
 
   void Renderer::ambientlight(Color & color, Color const& ka )  //berechnet ambientlight 
   {
     color+=(scene_.backgroundclr_)*(ka);
-  //  std::cout << "obj color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
-   /* std::cout << "ambient color:" <<scene_.light_[0]->color_.r << ","<< scene_.light_[0]->color_.g <<"," <<scene_.light_[0]->color_.b << ","
-                                  <<scene_.light_[0]->brightness_<< 
-                                  ","<<scene_.light_[0]->point_.x<< ","<<scene_.light_[0]->point_.y<< ","<<scene_.light_[0]->point_.z<<"\n";
- */
   }
 
 
@@ -157,7 +127,6 @@ void Renderer::write(Pixel const& p)
     glm::vec3 direction = glm::normalize(light->point_- hit.intersect_); //vector an intersect punkt normalisieren
     Ray ray_to_light {hit.intersect_+(direction*0.001f), direction}; //ray von intersect punkt zu light erstellen
 
-    //int distance = glm::length(hit.intersect_ - light->point_);  //distance zwischen light und intersect punkt
 
     Hit lightHit = scene_.composite_ -> intersect(ray_to_light);
 
@@ -168,8 +137,6 @@ void Renderer::write(Pixel const& p)
       //falls kein hit: berechne diffus und specular light
     } 
 
-    
-     // std::cout << "point color:" <<color.r << ","<< color.g <<"," <<color.b <<"\n";
       //falls objekt dazwischen ist wirft es hier schatten
   }
 
@@ -198,10 +165,29 @@ void Renderer::write(Pixel const& p)
     
     clr = clr * next_Object_clr * Hitze.shape_->get_material().ks_;
 
-    //clr = clr *(1.0f - Hitze.shape_->get_material().ks_) + next_Object_clr * (Hitze.shape_->get_material().ks_);
-
   }
 
+  Color Renderer::antialiase(Ray const& rayman, float fact, unsigned int depth)
+  {
+    Color tempClr;
+    int samples = sqrt(fact);
+    for(int x = 1; x < samples +1; ++x)
+    {
+      for(int y = 1; y < samples +1; ++y)
+      {
+        Ray ray;
+        ray.direction.x = rayman.direction.x + (float) (x)/(float)samples-0.5f;
+        ray.direction.y = rayman.direction.y + (float) (y)/(float)samples-0.5f;
+        ray.direction.z = rayman.direction.z;
+        tempClr += raytrace(ray, depth);
+      }
+      tempClr.r = tempClr.r/fact;
+      tempClr.g = tempClr.g/fact;
+      tempClr.b = tempClr.b/fact;
+
+      return tempClr;
+    }
+  }
 
   Color Renderer::ToneMapping(Color & clr)
   {

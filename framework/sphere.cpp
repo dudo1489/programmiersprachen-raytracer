@@ -62,10 +62,10 @@ Hit Sphere::intersect(Ray const& rayman)
     
     sphere_hit.normal_ = glm::normalize(glm::vec3(glm::transpose(get_transform_inv_())*glm::vec4(sphere_hit.normal_, 0.0)));
     sphere_hit.hit_ = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_, sphere_hit.intersect_, sphere_hit.normal_);
-    if(glm::distance(sphere_hit.intersect_ - 0.001f * ray.direction, center_) < radius_)
+    /* if(glm::distance(sphere_hit.intersect_ - 0.001f * ray.direction, center_) < radius_)
     {
         sphere_hit.normal_ = - sphere_hit.normal_;
-    }
+    } */
     
         if(sphere_hit.hit_)
         {

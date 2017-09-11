@@ -28,7 +28,7 @@ public:
 
     std::ostream& print(std::ostream& os) const override;
 
-   // bool intersect(Ray const& ray, float& distance) override;
+   
     Hit intersect(Ray const& ray) override;
     glm::vec3 calculate_normale(Hit const& hit) const override;
 
