@@ -62,6 +62,7 @@ struct Color
     return tmp;
   }
 
+
   Color& operator *=(Color other)
   {
     r *= other.r;

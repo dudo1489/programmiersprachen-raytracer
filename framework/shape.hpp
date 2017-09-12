@@ -38,7 +38,7 @@ protected:
     Shape(Material const& mat, String const& name);
     
 
-    Material const& get_material() const;
+    Material const& get_material();
     String const& get_name() const;
     glm::mat4 get_transform_() const;
     glm::mat4 get_transform_inv_() const;

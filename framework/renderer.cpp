@@ -49,7 +49,7 @@ void Renderer::render()
       Ray temp_ray = scene_.camera_.find(scene_.renderinfo_.camera_chosen)->second.generate_ray(x, y, height_, width_);
     
       
-      p.color = raytrace(temp_ray, 0);
+      p.color = raytrace(temp_ray, 2);
       //p.color = antialiase(temp_ray, 4, 0);
 
       //p.color = ToneMapping(p.color);
@@ -101,6 +101,7 @@ void Renderer::write(Pixel const& p)
 
       if(depth>0)
       {
+        
         spiegelung(color, hit, ray, depth);
       }
 
@@ -158,14 +159,33 @@ void Renderer::write(Pixel const& p)
 
   void Renderer::spiegelung(Color & clr, Hit const& Hitze, Ray const& ray, unsigned int depth)
   {
-    auto direction = glm::normalize(glm::reflect(ray.direction, Hitze.normal_));
+    glm::vec3 direction = glm::normalize(glm::reflect(ray.direction, Hitze.normal_));
     Ray ray_to_Object{Hitze.intersect_+ (direction*0.01f), direction};
 
     Color next_Object_clr = raytrace(ray_to_Object, depth-1);
-    
-    clr = clr * next_Object_clr * Hitze.shape_->get_material().ks_;
+
+    clr += next_Object_clr;
+    //clr = clr * next_Object_clr * (1.0f-Hitze.shape_->get_material().ks_);
 
   }
+
+  /* Color Renderer::reflection(Hit const& hit, Ray const& ray, unsigned depth) const
+  {
+    Color reflection_color;
+  
+    glm::vec3 reflection = glm::normalize(glm::reflect(ray.direction, hit.normal_));
+  
+    Ray reflection_ray
+    {
+      hit.intersection_ + (0.01f * reflection),
+  
+      reflection
+    };
+  
+    reflection_color = raytrace(reflection_ray, depth - 1);
+  
+    return reflection_color;
+  } */ 
 
   Color Renderer::antialiase(Ray const& rayman, float fact, unsigned int depth)
   {

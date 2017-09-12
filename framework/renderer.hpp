@@ -30,6 +30,7 @@ public:
   void specularlight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight, Ray const& ray);
   void diffuselight(Color & clr, Hit const& Hitze, std::shared_ptr<Light> const& light,  Ray const& raylight);
   Color ToneMapping(Color & clr);
+  //Color reflection(Hit const& hit, Ray const& ray, unsigned depth) const
   Color antialiase(Ray const& ray, float fact, unsigned int depth);
   void pointlight(Color & color, std::shared_ptr<Light> const& light,Hit const& hit, Ray const& ray);
   void spiegelung(Color & clr, Hit const& Hitze, Ray const& ray, unsigned int depth);

@@ -41,7 +41,7 @@ Shape::Shape():
 Shape::~Shape() 
     {}
 
-Material const& Shape::get_material() const
+Material const& Shape::get_material()
  {
      return material_;
  } 
